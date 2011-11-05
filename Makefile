@@ -1,8 +1,7 @@
 all:
-	lex blokk.l
-	yacc -d blokk.y -o y.tab.cc
-	gcc -c lex.yy.c -o lex.yy.o
-	c++ lex.yy.o y.tab.cc -o blokk
+	bison -d -o parser.cpp blokk.y
+	flex -o tokens.cpp blokk.l
+	c++ parser.cpp tokens.cpp -o blokk
 
 clean:
 	rm lex.yy.o
