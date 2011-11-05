@@ -1,5 +1,8 @@
 %{
-#include "y.tab.hh"
+#include <string>
+#include "parser.hpp"
+
+extern "C" int yywrap() {}
 %}
 
 %%

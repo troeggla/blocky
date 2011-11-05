@@ -7,17 +7,10 @@
 
 using namespace std;
 
-extern "C" {
-    int yyparse();
-    int yylex();
+extern int yylex();
 
-    int yywrap() {
-        return 1;
-    }
-
-    void yyerror(const char *s) {
-        fprintf(stderr, "ERROR: %s\n", s);
-    }
+void yyerror(const char *s) {
+    fprintf(stderr, "ERROR: %s\n", s);
 }
 %}
 
@@ -26,7 +19,7 @@ extern "C" {
 
 %%
 
-statments:;
+statements: ;
 
 %%
 
