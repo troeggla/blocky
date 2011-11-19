@@ -25,12 +25,14 @@ void yyerror(const char *s) {
 %token <string> T_VAR T_FLOAT T_INT T_STRING T_BOOL
 
 %token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE
-%token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS
-%token <token> T_IF T_UNLESS T_WHILE T_TIMES
+%token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS T_GLOBAL
+%token <token> T_IF T_UNLESS T_ELSE T_WHILE T_TIMES
 
+%left T_AND T_OR
+%left T_GE T_LE T_NE T_EQUAL '<' '>'
 %left '+' '-'
 %left '*' '/'
-%left T_IF T_UNLESS
+%nonassoc UMINUS
 
 %start program
 
@@ -58,6 +60,7 @@ identifier : T_VAR
            ;
 
 expression : identifier
+           | '-' expression %prec UMINUS
            | expression '+' expression
            | expression '-' expression
            | expression '*' expression
@@ -66,7 +69,7 @@ expression : identifier
            ;
 
 assignment : T_VAR '=' expression
-           | T_VAR '=' T_NIL
+           | T_GLOBAL T_VAR '=' expression
            ;
 
 loop : T_WHILE expression T_DO statements T_END
