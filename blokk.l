@@ -29,9 +29,11 @@ true|false          SAVE_TOKEN; return T_BOOL;
 
 "if"                return TOKEN(T_IF);
 "unless"            return TOKEN(T_UNLESS);
+"else"              return TOKEN(T_ELSE);
 "while"             return TOKEN(T_WHILE);
 "times"             return TOKEN(T_TIMES);
 "return"            return TOKEN(T_RETURN);
+"global"            return TOKEN(T_GLOBAL);
 "puts"              return TOKEN(T_PUTS);
 "do"                return TOKEN(T_DO);
 "end"               return TOKEN(T_END);
