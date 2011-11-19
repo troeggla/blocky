@@ -10,7 +10,7 @@ extern "C" int yywrap() {}
 
 %%
 
-[ \t\n]             ;
+[ \t]               ;
 #.*$                ;
 
 \$[a-zA-Z]+         SAVE_TOKEN; return T_VAR;
@@ -19,14 +19,23 @@ extern "C" int yywrap() {}
 \"[^"]*\"|'[^']*'   SAVE_TOKEN; return T_STRING;
 true|false          SAVE_TOKEN; return T_BOOL;
 
-nil                 return TOKEN(T_NIL);
-if                  return TOKEN(T_IF);
-unless              return TOKEN(T_UNLESS);
-while               return TOKEN(T_WHILE);
-return              return TOKEN(T_RETURN);
-do                  return TOKEN(T_DO);
-end                 return TOKEN(T_END);
+"nil"               return TOKEN(T_NIL);
+"and"               return TOKEN(T_AND);
+"or"                return TOKEN(T_OR);
+"=="                return TOKEN(T_EQUAL);
+">="                return TOKEN(T_GE);
+"<="                return TOKEN(T_LE);
+"!="                return TOKEN(T_NE);
 
-.                   return yytext;
+"if"                return TOKEN(T_IF);
+"unless"            return TOKEN(T_UNLESS);
+"while"             return TOKEN(T_WHILE);
+"return"            return TOKEN(T_RETURN);
+"puts"              return TOKEN(T_PUTS);
+"do"                return TOKEN(T_DO);
+"end"               return TOKEN(T_END);
+
+[;\n]               return TOKEN(T_SEP);
+.                   return TOKEN(yytext[0]);
 
 %%
