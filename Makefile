@@ -10,4 +10,4 @@ compile:
 	c++ parser.cpp tokens.cpp -o blokk
 
 clean:
-	@rm -v tokens.cpp parser.* 2>/dev/null
+	@rm -v tokens.cpp parser.* 2>/dev/null || exit 0
