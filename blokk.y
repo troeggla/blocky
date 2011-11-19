@@ -5,13 +5,15 @@
 #include <string>
 #include <map>
 
+#define YYDEBUG 1
+
 extern FILE* yyin;
 extern int yylineno;
 
 extern int yylex();
 
 void yyerror(const char *s) {
-    std::cerr << "ERROR: " << s << " in line " << yylineno << std::endl;
+    std::cerr << "ERROR: " << s << " in line " << yylineno-1 << std::endl;
 }
 %}
 
@@ -34,7 +36,7 @@ void yyerror(const char *s) {
 
 %%
 
-program : statements { std::cout << "Reduction complete" << std::endl; }
+program : statements
         ;
 
 statements : statement
@@ -44,8 +46,9 @@ statements : statement
 statement : expression 
           | assignment 
           | loop 
-          | condition { std::cout << "Condition found" << std::endl; }
+          | condition
           | T_PUTS expression 
+          | T_SEP
           ;
 
 expression : T_VAR
@@ -81,13 +84,15 @@ bool_stmt : T_BOOL
 
 condition : T_IF bool_stmt T_DO statements T_END
           | T_UNLESS bool_stmt T_DO statements T_END
-          /*| assignment T_IF bool_stmt
-          | assignment T_UNLESS bool_stmt*/
+          | assignment T_IF bool_stmt
+          | assignment T_UNLESS bool_stmt
           ;
 
 %%
 
 int main(int argc, char *argv[]) {
+    //yydebug = 1;
+
     if (argc == 2) {
         yyin = fopen(argv[1], "r");
         yyparse();

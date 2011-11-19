@@ -35,7 +35,7 @@ true|false          SAVE_TOKEN; return T_BOOL;
 "do"                return TOKEN(T_DO);
 "end"               return TOKEN(T_END);
 
-[;\n]               return TOKEN(T_SEP);
+[;\n]               yylineno++; return TOKEN(T_SEP);
 .                   return TOKEN(yytext[0]);
 
 %%
