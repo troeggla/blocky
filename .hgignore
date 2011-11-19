@@ -1,2 +1,4 @@
 \.swp$
 blokk
+test/
+(parser|tokens)\..*
