@@ -30,6 +30,7 @@ true|false          SAVE_TOKEN; return T_BOOL;
 "if"                return TOKEN(T_IF);
 "unless"            return TOKEN(T_UNLESS);
 "while"             return TOKEN(T_WHILE);
+"times"             return TOKEN(T_TIMES);
 "return"            return TOKEN(T_RETURN);
 "puts"              return TOKEN(T_PUTS);
 "do"                return TOKEN(T_DO);
