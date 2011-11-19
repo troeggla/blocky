@@ -32,7 +32,7 @@ void yyerror(const char *s) {
 %left T_GE T_LE T_NE T_EQUAL '<' '>'
 %left '+' '-'
 %left '*' '/'
-%nonassoc UMINUS
+%nonassoc UNARY
 
 %start program
 
@@ -60,7 +60,7 @@ identifier : T_VAR
            ;
 
 expression : identifier
-           | '-' expression %prec UMINUS
+           | '-' expression %prec UNARY
            | expression '+' expression
            | expression '-' expression
            | expression '*' expression
@@ -86,14 +86,15 @@ bool_stmt : T_BOOL
           | expression T_NE expression
           | expression '>' expression
           | expression '<' expression
-          | '!' bool_stmt
+          | '!' bool_stmt %prec UNARY
           ;
 
-condition : T_IF bool_stmt T_DO statements T_END
+condition: T_IF bool_stmt T_DO assignment T_END
+/*condition : T_IF bool_stmt T_DO statements T_END
           | T_UNLESS bool_stmt T_DO statements T_END
           | assignment T_IF bool_stmt
           | assignment T_UNLESS bool_stmt
-          ;
+          ;*/
 
 %%
 
