@@ -1,7 +1,7 @@
 all: bison flex compile
 
 bison:
-	bison -d -o parser.cpp blokk.y
+	bison -d -rsolved -o parser.cpp blokk.y
 
 flex:
 	flex -o tokens.cpp blokk.l
