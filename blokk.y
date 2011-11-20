@@ -93,9 +93,9 @@ bool_stmt : T_BOOL
           | '!' bool_stmt %prec UNARY
           ;
 
-condition : T_IF bool_stmt T_DO statements T_END %prec IFX
+condition : T_IF bool_stmt T_DO statements T_END 
           | T_IF bool_stmt T_DO statements T_ELSE statements T_END
-          | T_UNLESS bool_stmt T_DO statements T_END %prec IFX
+          | T_UNLESS bool_stmt T_DO statements T_END 
           | T_UNLESS bool_stmt T_DO statements T_ELSE statements T_END
           | assignment T_IF bool_stmt
           | assignment T_UNLESS bool_stmt
