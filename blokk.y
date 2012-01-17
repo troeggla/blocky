@@ -42,8 +42,9 @@ void yyerror(const char *s) {
 %nonassoc IFX
 %nonassoc T_ELSE
 
+%left T_EQUAL T_NE
 %left T_AND T_OR
-%left T_GE T_LE T_NE T_EQUAL '<' '>'
+%left T_GE T_LE '<' '>'
 %left '+' '-'
 %left '*' '/'
 
@@ -67,7 +68,6 @@ statement : expression
           | T_PUTS expression { std::cout << $2->evaluate() << std::endl; }
           | T_PUTS bool_stmt {  std::string val = ($2->evaluate() == true) ? "true" : "false";
                                 std::cout << "bool:" << val << std::endl; }
-          | T_SEP
           ;
 
 identifier : T_VAR { $$ = $1; }
