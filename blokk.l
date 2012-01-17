@@ -17,10 +17,11 @@ extern "C" int yywrap() {}
 #.*$                ;
 
 \$[a-zA-Z]+         SAVE_TOKEN; return T_VAR;
-[0-9]+\.[0-9]+      yylval.expr = new NumExpression(new double); return T_FLOAT;
-[0-9]+              SAVE_TOKEN; return T_INT;
-\"[^"]*\"|'[^']*'   SAVE_TOKEN; return T_STRING;
-true|false          SAVE_TOKEN; return T_BOOL;
+[0-9]+\.[0-9]+      yylval.expr = new NumExpression(atof(yytext)); return T_FLOAT;
+[0-9]+              yylval.expr = new NumExpression(atof(yytext)); return T_INT;
+\"[^"]*\"|'[^']*'   yylval.expr = new NumExpression(atof(yytext)); return T_STRING;
+true                yylval.expr = new NumExpression(1); return T_BOOL;
+false               yylval.expr = new NumExpression(0); return T_BOOL;
 
 "nil"               return TOKEN(T_NIL);
 "and"               return TOKEN(T_AND);
