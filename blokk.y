@@ -7,6 +7,7 @@
 
 #include "src/numExpression.hpp"
 #include "src/boolExpression.hpp"
+#include "parser.hpp"
 
 #define YYDEBUG 1
 
@@ -36,6 +37,7 @@ void yyerror(const char *s) {
 %token <token> T_IF T_UNLESS T_ELSE T_WHILE T_TIMES
 
 %type <expr> expression identifier
+%type <boolean> bool_stmt
 
 %nonassoc IFX
 %nonassoc T_ELSE
@@ -89,10 +91,10 @@ loop : T_WHILE expression T_DO statements T_END
      | T_INT T_TIMES T_DO statements T_END
      ;
 
-bool_stmt : T_BOOL
-          | bool_stmt T_AND bool_stmt
+bool_stmt : T_BOOL { $$ = $1; }
+          | bool_stmt T_AND bool_stmt { $$ = new BoolExpression($1, $3, 'a'); }
           | bool_stmt T_OR bool_stmt
-          | '(' bool_stmt ')'
+          | '(' bool_stmt ')' { $$ = $2; }
           | expression T_EQUAL expression
           | expression T_GE expression
           | expression T_LE expression
