@@ -53,6 +53,8 @@ bool BoolExpression::evaluate() {
             return (ex1->evaluate() or ex2->evaluate());
         case 3:
             return (ex1->evaluate() == ex2->evaluate());
+        case 6:
+            return (numEx1->evaluate() != numEx2->evaluate());
         case 9:
             return !(ex1->evaluate());
         }
