@@ -97,6 +97,7 @@ bool_stmt : T_BOOL { $$ = $1; }
           | bool_stmt T_AND bool_stmt { $$ = new BoolExpression($1, $3, 1); }
           | bool_stmt T_OR bool_stmt  { $$ = new BoolExpression($1, $3, 2); }
           | '(' bool_stmt ')' { $$ = $2; }
+          | bool_stmt T_EQUAL bool_stmt { $$ = new BoolExpression($1, $3, 3); }
           | expression T_EQUAL expression { $$ = new BoolExpression($1, $3, 3); }
           | expression T_GE expression { $$ = new BoolExpression($1, $3, 4); }
           | expression T_LE expression { $$ = new BoolExpression($1, $3, 5); }
