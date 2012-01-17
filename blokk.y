@@ -14,8 +14,6 @@ extern int yylineno;
 
 extern int yylex();
 
-NumExpression ex(new double);
-
 void yyerror(const char *s) {
     std::cerr << "ERROR: " << s << " in line " << yylineno-1 << std::endl;
 }
@@ -27,11 +25,13 @@ void yyerror(const char *s) {
     NumExpression *expr;
 }
 
-%token <string> T_VAR T_FLOAT T_INT T_STRING T_BOOL
+%token <expr> T_VAR T_FLOAT T_INT T_STRING T_BOOL
 
 %token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE
 %token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS T_GLOBAL
 %token <token> T_IF T_UNLESS T_ELSE T_WHILE T_TIMES
+
+%type <expr> expression identifier
 
 %nonassoc IFX
 %nonassoc T_ELSE
@@ -58,23 +58,23 @@ statement : expression
           | assignment 
           | loop 
           | condition
-          | T_PUTS expression 
+          | T_PUTS expression { std::cout << $2->evaluate() << std::endl; } 
           | T_SEP
           ;
 
-identifier : T_VAR
-           | T_FLOAT
-           | T_INT
-           | T_STRING
+identifier : T_VAR { $$ = $1; }
+           | T_FLOAT { $$ = $1; }
+           | T_INT { $$ = $1; }
+           /*| T_STRING { $$ = $1; }*/
            ;
 
-expression : identifier
-           | '-' expression %prec UNARY
-           | expression '+' expression
-           | expression '-' expression
-           | expression '*' expression
-           | expression '/' expression
-           | '(' expression ')'
+expression : identifier { $$ = $1; }
+           | '-' expression %prec UNARY { $$ = new NumExpression($2, new NumExpression(-1), '*'); }
+           | expression '+' expression { $$ = new NumExpression($1, $3, '+'); }
+           | expression '-' expression { $$ = new NumExpression($1, $3, '-'); }
+           | expression '*' expression { $$ = new NumExpression($1, $3, '*'); }
+           | expression '/' expression { $$ = new NumExpression($1, $3, '/'); }
+           | '(' expression ')' { $$ = $2; }
            ;
 
 assignment : T_VAR '=' expression

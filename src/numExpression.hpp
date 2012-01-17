@@ -7,7 +7,7 @@ class NumExpression {
     char op;
 
 public:
-    NumExpression(double*);
+    NumExpression(double);
     NumExpression(NumExpression*, NumExpression*, char);
     ~NumExpression();
 

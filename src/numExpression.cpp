@@ -1,7 +1,9 @@
+#include <iostream>
 #include "numExpression.hpp"
 
-NumExpression::NumExpression(double *value) {
-    this->value = value;
+NumExpression::NumExpression(double value) {
+    this->value = new double;
+    *(this->value) = value;
 }
 
 NumExpression::NumExpression(NumExpression *ex1, NumExpression *ex2, char op) : ex1(ex1), ex2(ex2), op(op) {
@@ -19,9 +21,12 @@ NumExpression::~NumExpression() {
 
 double NumExpression::evaluate() {
     if (this->value != 0) {
-        return *this->value;
+        return *value;
     } else {
-        switch (this->op) {
+        double val1 = ex1->evaluate();
+        double val2 = ex2->evaluate();
+
+        switch (op) {
         case '+':
             return ex1->evaluate() + ex2->evaluate();
         case '-':
