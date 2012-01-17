@@ -1,5 +1,8 @@
 %{
 #include <string>
+#include <stdlib.h>
+
+#include "src/numExpression.hpp"
 #include "parser.hpp"
 
 #define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
@@ -14,7 +17,7 @@ extern "C" int yywrap() {}
 #.*$                ;
 
 \$[a-zA-Z]+         SAVE_TOKEN; return T_VAR;
-[0-9]+\.[0-9]+      SAVE_TOKEN; return T_FLOAT;
+[0-9]+\.[0-9]+      yylval.expr = new NumExpression(new double); return T_FLOAT;
 [0-9]+              SAVE_TOKEN; return T_INT;
 \"[^"]*\"|'[^']*'   SAVE_TOKEN; return T_STRING;
 true|false          SAVE_TOKEN; return T_BOOL;

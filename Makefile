@@ -1,12 +1,12 @@
 all: bison flex compile
 
 bison: blokk.y
-	bison -d -rsolved -t -o parser.cpp $^
+	bison -d -o parser.cpp $^
 
 flex: blokk.l parser.hpp
 	flex -o tokens.cpp blokk.l
 
-compile: parser.cpp tokens.cpp src/expression.cpp
+compile: parser.cpp tokens.cpp src/numExpression.cpp
 	c++ $^ -o blokk
 
 clean:
