@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "src/numExpression.hpp"
+#include "src/boolExpression.hpp"
 #include "parser.hpp"
 
 #define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
@@ -20,8 +21,8 @@ extern "C" int yywrap() {}
 [0-9]+\.[0-9]+      yylval.expr = new NumExpression(atof(yytext)); return T_FLOAT;
 [0-9]+              yylval.expr = new NumExpression(atof(yytext)); return T_INT;
 \"[^"]*\"|'[^']*'   yylval.expr = new NumExpression(atof(yytext)); return T_STRING;
-true                yylval.expr = new NumExpression(1); return T_BOOL;
-false               yylval.expr = new NumExpression(0); return T_BOOL;
+true                yylval.boolean = new BoolExpression(true); return T_BOOL;
+false               yylval.boolean = new BoolExpression(false); return T_BOOL;
 
 "nil"               return TOKEN(T_NIL);
 "and"               return TOKEN(T_AND);

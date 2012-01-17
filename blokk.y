@@ -6,6 +6,7 @@
 #include <map>
 
 #include "src/numExpression.hpp"
+#include "src/boolExpression.hpp"
 
 #define YYDEBUG 1
 
@@ -23,9 +24,12 @@ void yyerror(const char *s) {
     std::string *string;
     int token;
     NumExpression *expr;
+    BoolExpression *boolean;
 }
 
-%token <expr> T_VAR T_FLOAT T_INT T_STRING T_BOOL
+%token <expr> T_VAR T_FLOAT T_INT;
+%token <boolean> T_BOOL;
+%token <string> T_STRING;
 
 %token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE
 %token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS T_GLOBAL
@@ -102,8 +106,6 @@ condition : T_IF bool_stmt T_DO statements T_END
           | T_IF bool_stmt T_DO statements T_ELSE statements T_END
           | T_UNLESS bool_stmt T_DO statements T_END 
           | T_UNLESS bool_stmt T_DO statements T_ELSE statements T_END
-          | assignment T_IF bool_stmt
-          | assignment T_UNLESS bool_stmt
           ;
 
 %%
