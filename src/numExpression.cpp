@@ -1,13 +1,23 @@
-#include "expression.hpp"
+#include "numExpression.hpp"
 
-Expression::Expression(double value) {
-    this->value = &value;
+NumExpression::NumExpression(double *value) {
+    this->value = value;
 }
 
-Expression::Expression(Expression *ex1, Expression *ex2, char op) : ex1(ex1), ex2(ex2), op(op) {
+NumExpression::NumExpression(NumExpression *ex1, NumExpression *ex2, char op) : ex1(ex1), ex2(ex2), op(op) {
 }
 
-double Expression::evaluate() {
+NumExpression::~NumExpression() {
+    if (ex1 != 0) {
+        delete ex1;
+    }
+
+    if (ex2 != 0) {
+        delete ex2;
+    }
+}
+
+double NumExpression::evaluate() {
     if (this->value != 0) {
         return *this->value;
     } else {

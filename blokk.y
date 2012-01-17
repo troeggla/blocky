@@ -5,12 +5,16 @@
 #include <string>
 #include <map>
 
+#include "src/numExpression.hpp"
+
 #define YYDEBUG 1
 
 extern FILE* yyin;
 extern int yylineno;
 
 extern int yylex();
+
+NumExpression ex(new double);
 
 void yyerror(const char *s) {
     std::cerr << "ERROR: " << s << " in line " << yylineno-1 << std::endl;
@@ -20,6 +24,7 @@ void yyerror(const char *s) {
 %union {
     std::string *string;
     int token;
+    NumExpression *expr;
 }
 
 %token <string> T_VAR T_FLOAT T_INT T_STRING T_BOOL
