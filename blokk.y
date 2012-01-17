@@ -89,8 +89,11 @@ assignment : T_VAR '=' expression
            | T_GLOBAL T_VAR '=' expression
            ;
 
-loop : T_WHILE expression T_DO statements T_END
-     | T_INT T_TIMES T_DO statements T_END
+block : T_DO statements T_END
+      ;
+
+loop : T_WHILE bool_stmt block
+     | expression T_TIMES block
      ;
 
 bool_stmt : T_BOOL { $$ = $1; }
@@ -107,9 +110,9 @@ bool_stmt : T_BOOL { $$ = $1; }
           | '!' bool_stmt %prec UNARY { $$ = new BoolExpression($2, 0, 9); }
           ;
 
-condition : T_IF bool_stmt T_DO statements T_END 
+condition : T_IF bool_stmt block
           | T_IF bool_stmt T_DO statements T_ELSE statements T_END
-          | T_UNLESS bool_stmt T_DO statements T_END 
+          | T_UNLESS bool_stmt block
           | T_UNLESS bool_stmt T_DO statements T_ELSE statements T_END
           ;
 
