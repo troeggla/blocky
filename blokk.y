@@ -64,7 +64,9 @@ statement : expression
           | assignment 
           | loop 
           | condition
-          | T_PUTS expression { std::cout << $2->evaluate() << std::endl; } 
+          | T_PUTS expression { std::cout << $2->evaluate() << std::endl; }
+          | T_PUTS bool_stmt {  std::string val = ($2->evaluate() == true) ? "true" : "false";
+                                std::cout << "bool:" << val << std::endl; }
           | T_SEP
           ;
 
@@ -92,16 +94,16 @@ loop : T_WHILE expression T_DO statements T_END
      ;
 
 bool_stmt : T_BOOL { $$ = $1; }
-          | bool_stmt T_AND bool_stmt { $$ = new BoolExpression($1, $3, 'a'); }
-          | bool_stmt T_OR bool_stmt
+          | bool_stmt T_AND bool_stmt { $$ = new BoolExpression($1, $3, 1); }
+          | bool_stmt T_OR bool_stmt  { $$ = new BoolExpression($1, $3, 2); }
           | '(' bool_stmt ')' { $$ = $2; }
-          | expression T_EQUAL expression
-          | expression T_GE expression
-          | expression T_LE expression
-          | expression T_NE expression
-          | expression '>' expression
-          | expression '<' expression
-          | '!' bool_stmt %prec UNARY
+          | expression T_EQUAL expression { $$ = new BoolExpression($1, $3, 3); }
+          | expression T_GE expression { $$ = new BoolExpression($1, $3, 4); }
+          | expression T_LE expression { $$ = new BoolExpression($1, $3, 5); }
+          | expression T_NE expression { $$ = new BoolExpression($1, $3, 6); }
+          | expression '>' expression { $$ = new BoolExpression($1, $3, 7); }
+          | expression '<' expression { $$ = new BoolExpression($1, $3, 8); }
+          | '!' bool_stmt %prec UNARY { $$ = new BoolExpression($2, 0, 9); }
           ;
 
 condition : T_IF bool_stmt T_DO statements T_END 
