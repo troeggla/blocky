@@ -1,4 +1,3 @@
-#include <iostream>
 #include "numExpression.hpp"
 
 NumExpression::NumExpression(double value) {
@@ -17,6 +16,10 @@ NumExpression::~NumExpression() {
     if (ex2 != 0) {
         delete ex2;
     }
+}
+
+std::string NumExpression::getType() {
+    return "numerical";
 }
 
 double NumExpression::evaluate() {
