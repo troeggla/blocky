@@ -16,7 +16,17 @@ BoolExpression::BoolExpression(NumExpression *ex1, NumExpression *ex2, char op) 
 }
 
 BoolExpression::~BoolExpression() {
-    //XXX IMPLEMENT ME
+    if (this->value != 0) {
+        delete this->value;
+    }
+
+    if (this->ex1 != 0) {
+        delete this->ex1;
+    }
+
+    if (this->ex2 != 0) {
+        delete this->ex2;
+    }
 }
 
 bool BoolExpression::evaluate() {
