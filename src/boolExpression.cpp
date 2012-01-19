@@ -1,5 +1,4 @@
 #include "boolExpression.hpp"
-#include <iostream>
 
 BoolExpression::BoolExpression(bool value) {
     this->value = new bool;
@@ -27,6 +26,10 @@ BoolExpression::~BoolExpression() {
     if (this->ex2 != 0) {
         delete this->ex2;
     }
+}
+
+std::string BoolExpression::getType() {
+    return "bool";
 }
 
 bool BoolExpression::evaluate() {

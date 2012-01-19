@@ -1,9 +1,12 @@
 #ifndef boolexpression_hpp
 #define boolexpression_hpp
 
+#include <iostream>
+
+#include "expression.hpp"
 #include "numExpression.hpp"
 
-class BoolExpression {
+class BoolExpression : public Expression {
     bool *value;
     char op;
     NumExpression *numEx1, *numEx2;
@@ -16,6 +19,7 @@ public:
     BoolExpression(NumExpression*, NumExpression*, char);
     ~BoolExpression();
 
+    virtual std::string getType();
     bool evaluate();
 };
 
