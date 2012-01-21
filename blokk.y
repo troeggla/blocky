@@ -5,6 +5,7 @@
 #include <string>
 
 #include "src/statement.hpp"
+#include "src/putStatement.hpp"
 #include "src/blockScope.hpp"
 #include "src/numExpression.hpp"
 #include "src/boolExpression.hpp"
@@ -43,7 +44,7 @@ void yyerror(const char *s) {
 
 %type <expr> expression identifier
 %type <boolean> bool_stmt
-%type <statement> statement assignment loop condition;
+%type <statement> statement assignment loop condition puts;
 
 %nonassoc IFX
 %nonassoc T_ELSE
@@ -67,13 +68,16 @@ statements : statement { current->add_statement($1); }
            | statements statement { current->add_statement($2); }
            ;
 
-statement : expression 
-          | assignment 
-          | loop 
-          | condition
-          | T_PUTS expression { std::cout << $2->evaluate() << std::endl; }
-          | T_PUTS bool_stmt {  std::string val = ($2->evaluate() == true) ? "true" : "false";
-                                std::cout << "bool:" << val << std::endl; }
+statement : expression T_SEP
+          | assignment T_SEP
+          | loop T_SEP
+          | condition T_SEP
+          | puts T_SEP
+          ;
+
+puts      : T_PUTS expression { $$ = new PutStatement($2); }
+          | T_PUTS bool_stmt {  $$ = new PutStatement($2); }
+          | T_PUTS T_STRING { $$ = new PutStatement($2); }
           ;
 
 identifier : T_VAR { $$ = new NumExpression(current->get_var(*$1)); }
