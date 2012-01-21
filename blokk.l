@@ -9,13 +9,16 @@
 
 #define TOKEN(t) (yylval.token = t)
 
+extern BlockScope* global;
+extern BlockScope* current;
+
 extern "C" int yywrap() {}
 %}
 
 %%
 
 [ \t]               ;
-[ \t]*\n$           ;
+[ \t]*\n$           yylineno++;
 #.*$                ;
 
 \$[a-z][a-zA-Z0-9_]*  yylval.string = new std::string(yytext, yyleng); return T_VAR;
@@ -41,7 +44,7 @@ false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 "return"            return TOKEN(T_RETURN);
 "global"            return TOKEN(T_GLOBAL);
 "puts"              return TOKEN(T_PUTS);
-"do"                return TOKEN(T_DO);
+"do"                current = new BlockScope(current); return TOKEN(T_DO);
 "end"               return TOKEN(T_END);
 
 [;\n]               yylineno++; return TOKEN(T_SEP);
