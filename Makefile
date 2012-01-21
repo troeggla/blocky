@@ -6,7 +6,7 @@ bison: blokk.y
 flex: blokk.l parser.hpp
 	flex -o tokens.cpp blokk.l
 
-compile: parser.cpp tokens.cpp src/numExpression.cpp src/boolExpression.cpp src/blockScope.cpp src/putStatement.cpp src/assignStatement.cpp src/blockStatement.cpp
+compile: parser.cpp tokens.cpp src/*.cpp
 	c++ $^ -o blokk
 
 clean:
