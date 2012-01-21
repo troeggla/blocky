@@ -5,6 +5,7 @@
 #include <string>
 
 #include "src/statement.hpp"
+#include "src/assignStatement.hpp"
 #include "src/putStatement.hpp"
 #include "src/blockScope.hpp"
 #include "src/numExpression.hpp"
@@ -68,8 +69,7 @@ statements : statement { current->add_statement($1); }
            | statements statement { current->add_statement($2); }
            ;
 
-statement : expression T_SEP
-          | assignment T_SEP
+statement : assignment T_SEP
           | loop T_SEP
           | condition T_SEP
           | puts T_SEP
@@ -80,7 +80,7 @@ puts      : T_PUTS expression { $$ = new PutStatement($2); }
           | T_PUTS T_STRING { $$ = new PutStatement($2); }
           ;
 
-identifier : T_VAR { $$ = new NumExpression(current->get_var(*$1)); }
+identifier : T_VAR { $$ = new NumExpression(current, *$1); }
            | T_FLOAT { $$ = $1; }
            | T_INT { $$ = $1; }
            ;
@@ -94,8 +94,8 @@ expression : identifier { $$ = $1; }
            | '(' expression ')' { $$ = $2; }
            ;
 
-assignment : T_VAR '=' expression { current->add_var(*$1, $3->evaluate()); }
-           | T_GLOBAL T_VAR '=' expression { global->add_var(*$2, $4->evaluate()); }
+assignment : T_VAR '=' expression { $$ = new AssignStatement(current, *$1, $3); }
+           | T_GLOBAL T_VAR '=' expression { $$ = new AssignStatement(global, *$2, $4); }
            ;
 
 block : T_DO statements T_END
