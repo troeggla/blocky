@@ -104,7 +104,7 @@ assignment : T_VAR '=' expression { $$ = new AssignStatement(current, *$1, $3); 
 block : T_DO T_SEP statements T_END
       ;
 
-loop : T_WHILE bool_stmt block
+loop : T_WHILE bool_stmt block 
      | expression T_TIMES block
      ;
 
@@ -124,7 +124,7 @@ bool_stmt : T_BOOL { $$ = $1; }
 
 condition : T_IF bool_stmt block { $$ = new BlockStatement(1, $2, current); current = current->get_parent(); }
           | T_IF bool_stmt T_DO statements T_ELSE statements T_END
-          | T_UNLESS bool_stmt block
+          | T_UNLESS bool_stmt block { $$ = new BlockStatement(2, $2, current); current = current->get_parent(); }
           | T_UNLESS bool_stmt T_DO statements T_ELSE statements T_END
           ;
 
