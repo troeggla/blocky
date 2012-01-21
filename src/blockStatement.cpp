@@ -9,5 +9,9 @@ void BlockStatement::evaluate() {
         if (boolean->evaluate()) {
             scope->evaluate();
         }
+    } else if (op == 2) {
+        if (!boolean->evaluate()) {
+            scope->evaluate();
+        }
     }
 }
