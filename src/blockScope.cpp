@@ -1,5 +1,8 @@
 #include "blockScope.hpp"
 
+BlockScope::BlockScope() {
+}
+
 BlockScope::BlockScope(BlockScope *parent) : parent(parent) {
 }
 
@@ -16,7 +19,7 @@ double BlockScope::find_var(std::string name) {
         if (parent != 0) {
             return parent->find_var(name);
         } else {
-            throw;
+            throw -1;
         }
     } else {
         return variables[name];
