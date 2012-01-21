@@ -2,6 +2,7 @@
 #include <string>
 #include <stdlib.h>
 
+#include "src/statement.hpp"
 #include "src/numExpression.hpp"
 #include "src/boolExpression.hpp"
 #include "parser.hpp"
