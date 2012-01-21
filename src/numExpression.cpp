@@ -5,6 +5,9 @@ NumExpression::NumExpression(double value) {
     *(this->value) = value;
 }
 
+NumExpression::NumExpression(BlockScope* scope, std::string var) : scope(scope), var(var) {
+}
+
 NumExpression::NumExpression(NumExpression *ex1, NumExpression *ex2, char op) : ex1(ex1), ex2(ex2), op(op) {
 }
 
@@ -25,6 +28,8 @@ std::string NumExpression::getType() {
 double NumExpression::evaluate() {
     if (this->value != 0) {
         return *value;
+    } else if (scope != 0) {
+        return scope->get_var(var);
     } else {
         double val1 = ex1->evaluate();
         double val2 = ex2->evaluate();
