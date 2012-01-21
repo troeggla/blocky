@@ -1,11 +1,12 @@
 %{
-#include <stdio.h>
+#include <stdlib.h>
 
 #include <iostream>
 #include <string>
 
 #include "src/statement.hpp"
 #include "src/assignStatement.hpp"
+#include "src/blockStatement.hpp"
 #include "src/putStatement.hpp"
 #include "src/blockScope.hpp"
 #include "src/numExpression.hpp"
@@ -16,6 +17,7 @@
 
 extern FILE* yyin;
 extern int yylineno;
+extern YYSTYPE yylval;
 
 BlockScope *global = new BlockScope();
 BlockScope *current = global;
@@ -23,7 +25,8 @@ BlockScope *current = global;
 extern int yylex();
 
 void yyerror(const char *s) {
-    std::cerr << "ERROR: " << s << " in line " << yylineno-1 << std::endl;
+    std::cerr << "ERROR: " << s << " in line " << yylineno-1 << ". Unexpected token " << yylval.token << std::endl;
+    exit(1);
 }
 %}
 
@@ -98,7 +101,7 @@ assignment : T_VAR '=' expression { $$ = new AssignStatement(current, *$1, $3); 
            | T_GLOBAL T_VAR '=' expression { $$ = new AssignStatement(global, *$2, $4); }
            ;
 
-block : T_DO statements T_END
+block : T_DO T_SEP statements T_END
       ;
 
 loop : T_WHILE bool_stmt block
@@ -119,7 +122,7 @@ bool_stmt : T_BOOL { $$ = $1; }
           | '!' bool_stmt %prec UNARY { $$ = new BoolExpression($2, 0, 9); }
           ;
 
-condition : T_IF bool_stmt block
+condition : T_IF bool_stmt block { $$ = new BlockStatement(1, $2, current); current = current->get_parent(); }
           | T_IF bool_stmt T_DO statements T_ELSE statements T_END
           | T_UNLESS bool_stmt block
           | T_UNLESS bool_stmt T_DO statements T_ELSE statements T_END
