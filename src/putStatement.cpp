@@ -11,7 +11,8 @@ PutStatement::PutStatement(BoolExpression *boolean) : boolean(boolean) {
 
 void PutStatement::evaluate() {
     if (str != 0) {
-        std::cout << (*str) << std::endl;
+        std::string out = str->substr(1, str->length() - 2);
+        std::cout << out << std::endl;
     } else if (num != 0) {
         std::cout << num->evaluate() << std::endl;
     } else if (boolean != 0) {
