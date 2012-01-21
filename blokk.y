@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 
+#include "src/statement.hpp"
 #include "src/blockScope.hpp"
 #include "src/numExpression.hpp"
 #include "src/boolExpression.hpp"
@@ -29,6 +30,7 @@ void yyerror(const char *s) {
     int token;
     NumExpression *expr;
     BoolExpression *boolean;
+    Statement *statement;
 }
 
 %token <expr> T_FLOAT T_INT;
@@ -41,6 +43,7 @@ void yyerror(const char *s) {
 
 %type <expr> expression identifier
 %type <boolean> bool_stmt
+%type <statement> statement assignment loop condition;
 
 %nonassoc IFX
 %nonassoc T_ELSE
@@ -60,7 +63,7 @@ void yyerror(const char *s) {
 program : statements
         ;
 
-statements : statement { current->add_statement($1): }
+statements : statement { current->add_statement($1); }
            | statements statement { current->add_statement($2); }
            ;
 
@@ -126,6 +129,8 @@ int main(int argc, char *argv[]) {
     if (argc == 2) {
         yyin = fopen(argv[1], "r");
         yyparse();
+
+        global->evaluate();
     } else {
         std::cerr << "No input file!" << std::endl;
     }
