@@ -1,6 +1,7 @@
 #ifndef blockscope_hpp
 #define blockscope_hpp
 
+#include <iostream>
 #include <string>
 #include <map>
 #include <vector>
@@ -15,6 +16,8 @@ class BlockScope {
 public:
     BlockScope();
     BlockScope(BlockScope*);
+
+    void dump();
 
     void add_var(std::string, double);
     void delete_var(std::string);

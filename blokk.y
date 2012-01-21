@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 
+#include "src/blockScope.hpp"
 #include "src/numExpression.hpp"
 #include "src/boolExpression.hpp"
 #include "parser.hpp"
@@ -12,6 +13,9 @@
 
 extern FILE* yyin;
 extern int yylineno;
+
+BlockScope *global = new BlockScope();
+BlockScope *current = global;
 
 extern int yylex();
 
@@ -27,9 +31,9 @@ void yyerror(const char *s) {
     BoolExpression *boolean;
 }
 
-%token <expr> T_VAR T_FLOAT T_INT;
+%token <expr> T_FLOAT T_INT;
 %token <boolean> T_BOOL;
-%token <string> T_STRING;
+%token <string> T_STRING T_VAR;
 
 %token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE
 %token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS T_GLOBAL
@@ -56,8 +60,8 @@ void yyerror(const char *s) {
 program : statements
         ;
 
-statements : statement
-           | statements statement
+statements : statement { current->add_statement($1): }
+           | statements statement { current->add_statement($2); }
            ;
 
 statement : expression 
@@ -69,10 +73,9 @@ statement : expression
                                 std::cout << "bool:" << val << std::endl; }
           ;
 
-identifier : T_VAR { $$ = $1; }
+identifier : T_VAR { $$ = new NumExpression(current->get_var(*$1)); }
            | T_FLOAT { $$ = $1; }
            | T_INT { $$ = $1; }
-           /*| T_STRING { $$ = $1; }*/
            ;
 
 expression : identifier { $$ = $1; }
@@ -84,8 +87,8 @@ expression : identifier { $$ = $1; }
            | '(' expression ')' { $$ = $2; }
            ;
 
-assignment : T_VAR '=' expression
-           | T_GLOBAL T_VAR '=' expression
+assignment : T_VAR '=' expression { current->add_var(*$1, $3->evaluate()); }
+           | T_GLOBAL T_VAR '=' expression { global->add_var(*$2, $4->evaluate()); }
            ;
 
 block : T_DO statements T_END
