@@ -36,16 +36,12 @@ double BlockScope::find_var(std::string name) {
 }
 
 double BlockScope::get_var(std::string name) {
-    if (variables.find(name) == variables.end()) {
-        try {
-            return find_var(name);
-        } catch (std::exception) {
-            this->add_var(name, 0);
-            return 0;
-        }
+    try {
+        return find_var(name);
+    } catch (std::exception) {
+        this->add_var(name, 0);
+        return 0;
     }
-
-    return variables[name];
 }
 
 void BlockScope::add_statement(Statement *stmt) {
