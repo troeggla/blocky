@@ -6,7 +6,6 @@
 #include "src/boolExpression.hpp"
 #include "parser.hpp"
 
-#define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
 #define TOKEN(t) (yylval.token = t)
 
 extern "C" int yywrap() {}
@@ -17,10 +16,10 @@ extern "C" int yywrap() {}
 [ \t]               ;
 #.*$                ;
 
-\$[a-zA-Z]+         SAVE_TOKEN; return T_VAR;
+\$[a-zA-Z]+         yylval.string = new std::string(yytext, yyleng); return T_VAR;
 [0-9]+\.[0-9]+      yylval.expr = new NumExpression(atof(yytext)); return T_FLOAT;
 [0-9]+              yylval.expr = new NumExpression(atof(yytext)); return T_INT;
-\"[^"]*\"|'[^']*'   yylval.expr = new NumExpression(atof(yytext)); return T_STRING;
+\"[^"]*\"|'[^']*'   yylval.string = new std::string(yytext, yyleng); return T_STRING;
 true                yylval.boolean = new BoolExpression(true); return T_BOOL;
 false               yylval.boolean = new BoolExpression(false); return T_BOOL;
 
