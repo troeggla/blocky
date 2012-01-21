@@ -13,6 +13,7 @@ class BlockScope {
     std::map<std::string, double> variables;
 
 public:
+    BlockScope();
     BlockScope(BlockScope*);
 
     void add_var(std::string, double);
