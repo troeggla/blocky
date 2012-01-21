@@ -6,6 +6,14 @@ BlockScope::BlockScope() {
 BlockScope::BlockScope(BlockScope *parent) : parent(parent) {
 }
 
+BlockScope* BlockScope::get_parent() {
+    if (parent == 0) {
+        return this;
+    }
+
+    return parent;
+}
+
 void BlockScope::dump() {
     std::map<std::string, double>::iterator it;
 

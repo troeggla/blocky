@@ -17,6 +17,7 @@ public:
     BlockScope();
     BlockScope(BlockScope*);
 
+    BlockScope* get_parent();
     void dump();
 
     void add_var(std::string, double);
