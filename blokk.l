@@ -15,6 +15,7 @@ extern "C" int yywrap() {}
 %%
 
 [ \t]               ;
+[ \t]*\n$           ;
 #.*$                ;
 
 \$[a-zA-Z]+         yylval.string = new std::string(yytext, yyleng); return T_VAR;
