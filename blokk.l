@@ -18,12 +18,12 @@ extern "C" int yywrap() {}
 [ \t]*\n$           ;
 #.*$                ;
 
-\$[a-zA-Z]+         yylval.string = new std::string(yytext, yyleng); return T_VAR;
-[0-9]+\.[0-9]+      yylval.expr = new NumExpression(atof(yytext)); return T_FLOAT;
-[0-9]+              yylval.expr = new NumExpression(atof(yytext)); return T_INT;
-\"[^"]*\"|'[^']*'   yylval.string = new std::string(yytext, yyleng); return T_STRING;
-true                yylval.boolean = new BoolExpression(true); return T_BOOL;
-false               yylval.boolean = new BoolExpression(false); return T_BOOL;
+\$[a-z][a-zA-Z0-9_]*  yylval.string = new std::string(yytext, yyleng); return T_VAR;
+[0-9]+\.[0-9]+        yylval.expr = new NumExpression(atof(yytext)); return T_FLOAT;
+[0-9]+                yylval.expr = new NumExpression(atof(yytext)); return T_INT;
+\"[^"]*\"|'[^']*'     yylval.string = new std::string(yytext, yyleng); return T_STRING;
+true                  yylval.boolean = new BoolExpression(true); return T_BOOL;
+false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 
 "nil"               return TOKEN(T_NIL);
 "and"               return TOKEN(T_AND);
