@@ -1,14 +1,14 @@
 all: bison flex compile
 
-bison: blokk.y
-	bison -d -o parser.cpp $^
+bison: grammar/blocky.y
+	bison -d -o grammar/parser.cpp $^
 
-flex: blokk.l parser.hpp
-	flex -o tokens.cpp blokk.l
+flex: grammar/blocky.l grammar/parser.hpp
+	flex -o grammar/tokens.cpp grammar/blocky.l
 
-compile: parser.cpp tokens.cpp src/*.cpp -lSDL -lSDL_gfx
-	c++ $^ -o blokk
+compile: grammar/parser.cpp grammar/tokens.cpp grammar/src/*.cpp -lSDL -lSDL_gfx
+	c++ $^ -o blocky
 
 clean:
 	@echo -e "removing unused files..."
-	@rm -v tokens.cpp parser.* 2>/dev/null || exit 0
+	@rm -v grammar/tokens.cpp grammar/parser.* 2>/dev/null || exit 0
