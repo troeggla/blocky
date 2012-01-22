@@ -29,7 +29,6 @@ extern "C" int yywrap() {}
 true                  yylval.boolean = new BoolExpression(true); return T_BOOL;
 false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 
-"nil"               return TOKEN(T_NIL);
 "and"               return TOKEN(T_AND);
 "or"                return TOKEN(T_OR);
 "=="                return TOKEN(T_EQUAL);
@@ -42,7 +41,6 @@ false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 "else"              ifBlock = current; current = new BlockScope(ifBlock->get_parent()); return TOKEN(T_ELSE);
 "while"             return TOKEN(T_WHILE);
 "times"             return TOKEN(T_TIMES);
-"return"            return TOKEN(T_RETURN);
 "global"            return TOKEN(T_GLOBAL);
 "puts"              return TOKEN(T_PUTS);
 "put"               return TOKEN(T_PUT);
