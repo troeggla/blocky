@@ -1,0 +1,10 @@
+$direction = 0
+
+pen.goto 200, 100
+
+4 times do
+    pen.line 100
+    pen.turn 90
+end
+
+pen.update
