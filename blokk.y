@@ -8,9 +8,13 @@
 #include "src/assignStatement.hpp"
 #include "src/blockStatement.hpp"
 #include "src/putStatement.hpp"
+#include "src/penStatement.hpp"
+
 #include "src/blockScope.hpp"
+
 #include "src/numExpression.hpp"
 #include "src/boolExpression.hpp"
+
 #include "parser.hpp"
 
 #define YYDEBUG 1
@@ -46,10 +50,11 @@ void yyerror(const char *s) {
 %token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE
 %token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS T_GLOBAL T_PUT
 %token <token> T_IF T_UNLESS T_ELSE T_WHILE T_TIMES
+%token <token> PEN_GOTO PEN_TURN PEN_DRAW PEN_UPDATE
 
 %type <expr> expression identifier
 %type <boolean> bool_stmt
-%type <statement> statement assignment loop condition puts put;
+%type <statement> statement assignment loop condition puts put pen_cmd;
 
 %nonassoc IFX
 %nonassoc T_ELSE
@@ -78,7 +83,14 @@ statement : assignment T_SEP
           | condition T_SEP
           | puts T_SEP
           | put T_SEP
+          | pen_cmd T_SEP
           ;
+
+pen_cmd : PEN_GOTO expression ',' expression { $$ = new PenStatement(1, $2, $4); }
+        | PEN_TURN expression { $$ = new PenStatement(2, $2); }
+        | PEN_DRAW expression { $$ = new PenStatement(3, $2); }
+        | PEN_UPDATE { $$ = new PenStatement(4); }
+        ;
 
 puts      : T_PUTS expression { $$ = new PutStatement(1, $2); }
           | T_PUTS bool_stmt {  $$ = new PutStatement(1, $2); }
