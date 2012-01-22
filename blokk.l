@@ -44,6 +44,7 @@ false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 "return"            return TOKEN(T_RETURN);
 "global"            return TOKEN(T_GLOBAL);
 "puts"              return TOKEN(T_PUTS);
+"put"               return TOKEN(T_PUT);
 "do"                current = new BlockScope(current); return TOKEN(T_DO);
 "end"               return TOKEN(T_END);
 
