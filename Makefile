@@ -6,7 +6,7 @@ bison: blokk.y
 flex: blokk.l parser.hpp
 	flex -o tokens.cpp blokk.l
 
-compile: parser.cpp tokens.cpp src/*.cpp
+compile: parser.cpp tokens.cpp src/*.cpp -lSDL -lSDL_gfx
 	c++ $^ -o blokk
 
 clean:
