@@ -2,7 +2,7 @@ puts "testing if/else"
 
 # testing unless
 unless true do
-    puts "if branch" # sowas aber auch
+    puts "if branch"; # sowas aber auch
 else
     puts "else branch"
 end
