@@ -7,12 +7,14 @@
 
 class BlockStatement : public Statement {
     BlockScope *scope;
+    BlockScope *elseScope;
     BoolExpression *boolean;
     NumExpression *num;
     int op;
 
 public:
     BlockStatement(int, BoolExpression*, BlockScope*);
+    BlockStatement(int, BoolExpression*, BlockScope*, BlockScope*);
     BlockStatement(int, NumExpression*, BlockScope*);
 
     virtual void evaluate();

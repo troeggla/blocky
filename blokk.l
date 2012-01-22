@@ -11,6 +11,7 @@
 
 extern BlockScope* global;
 extern BlockScope* current;
+extern BlockScope* ifBlock;
 
 extern "C" int yywrap() {}
 %}
@@ -38,7 +39,7 @@ false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 
 "if"                return TOKEN(T_IF);
 "unless"            return TOKEN(T_UNLESS);
-"else"              return TOKEN(T_ELSE);
+"else"              ifBlock = current; current = new BlockScope(ifBlock->get_parent()); return TOKEN(T_ELSE);
 "while"             return TOKEN(T_WHILE);
 "times"             return TOKEN(T_TIMES);
 "return"            return TOKEN(T_RETURN);
