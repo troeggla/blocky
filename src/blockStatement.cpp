@@ -21,5 +21,9 @@ void BlockStatement::evaluate() {
         for (int i=0; i<num->evaluate(); i++) {
             scope->evaluate();
         }
+    } else if (op == 4) {
+        while (boolean->evaluate()) {
+            scope->evaluate();
+        }
     }
 }
