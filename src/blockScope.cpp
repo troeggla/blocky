@@ -22,9 +22,24 @@ void BlockScope::dump() {
     }
 }
 
+void BlockScope::set_var(std::string name, double value) {
+    if (variables.find(name) == variables.end()) {
+        if (parent != 0) {
+            parent->set_var(name, value);
+        } else {
+            throw std::exception();
+        }
+    } else {
+        variables[name] = value;
+    }
+}
 
 void BlockScope::add_var(std::string name, double value) {
-   variables[name] = value; 
+    try {
+        set_var(name, value);
+    } catch (std::exception) {
+        variables[name] = value; 
+    }
 }
 
 void BlockScope::delete_var(std::string name) {
