@@ -17,7 +17,7 @@ Pen::Pen() {
     SDL_Init(SDL_INIT_VIDEO);
     screen = SDL_SetVideoMode(640, 480, 0, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
-    SDL_WM_SetCaption("Block - Graphical Interface", 0);
+    SDL_WM_SetCaption("Blocky - Graphical Interface", 0);
 }
 
 Pen::~Pen() {
