@@ -1,0 +1,37 @@
+pen.goto 20,20
+pen.turn 90
+pen.line 100
+
+pen.goto 20,70
+pen.turn -90
+pen.line 40
+
+pen.turn -90
+pen.line 50
+pen.turn 180
+pen.line 100
+
+pen.goto 90,20
+pen.line 100
+
+pen.turn -90
+pen.line 40
+
+pen.goto 90,70
+pen.line 40
+
+pen.goto 90,20
+pen.line 40
+
+pen.goto 150, 20
+pen.turn 45
+pen.line 40
+pen.turn -90
+pen.line 40
+
+pen.turn 180
+pen.line 40
+pen.turn -45
+pen.line 70
+
+pen.update

@@ -1,0 +1,35 @@
+$var_1 = 10
+global $flip = 2
+$cheep = 5
+
+puts $cheep + $flip * $var_1
+
+5+4 times do
+    puts "times"
+end
+
+$cheep = 6
+puts $cheep + $flip * $var1
+puts $spinnmo
+
+if 7 <= 6 do 
+    $ha = 12
+    puts "conditional" 
+    puts $ha
+    puts $cheep
+end
+
+$i = 5
+while $i > 0 do
+    put "value of i: "
+    puts $i
+
+    $i = $i - 1
+end
+
+unless 7 <= 6 do
+    puts "unless"
+end
+
+puts "sowas aber auch..."
+puts $ha

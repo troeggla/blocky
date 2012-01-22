@@ -1,0 +1,12 @@
+puts "printing only even numbers"
+puts ""
+
+$counter = 0 
+while $counter <= 20 do
+    if $counter % 2 == 0 do
+        put "Found even number: "
+        puts $counter
+    end
+
+    $counter = $counter + 1
+end
