@@ -21,6 +21,7 @@ extern YYSTYPE yylval;
 
 BlockScope *global = new BlockScope();
 BlockScope *current = global;
+BlockScope *ifBlock = 0;
 
 extern int yylex();
 
@@ -129,9 +130,11 @@ bool_stmt : T_BOOL { $$ = $1; }
           ;
 
 condition : T_IF bool_stmt block { $$ = new BlockStatement(1, $2, current); current = current->get_parent(); }
-          | T_IF bool_stmt T_DO statements T_ELSE statements T_END
+          | T_IF bool_stmt T_DO T_SEP statements T_ELSE T_SEP statements T_END { $$ = new BlockStatement(5, $2, ifBlock, current); 
+                                                                                 current = current->get_parent(); ifBlock = 0; }
           | T_UNLESS bool_stmt block { $$ = new BlockStatement(2, $2, current); current = current->get_parent(); }
-          | T_UNLESS bool_stmt T_DO statements T_ELSE statements T_END
+          | T_UNLESS bool_stmt T_DO T_SEP statements T_ELSE T_SEP statements T_END { $$ = new BlockStatement(6, $2, ifBlock, current); 
+                                                                                     current = current->get_parent(); ifBlock = 0;}
           ;
 
 %%
