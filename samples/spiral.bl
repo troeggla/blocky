@@ -1,0 +1,11 @@
+$len = 10
+pen.goto 320, 240
+
+20 times do 
+    pen.line $len
+    pen.turn 60
+
+    $len = $len + 10
+end
+
+pen.update
