@@ -48,7 +48,7 @@ void yyerror(const char *s) {
 %token <string> T_STRING T_VAR;
 
 %token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE
-%token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS T_GLOBAL T_PUT
+%token <token> T_SEP T_DO T_END T_PUTS T_GLOBAL T_PUT
 %token <token> T_IF T_UNLESS T_ELSE T_WHILE T_TIMES
 %token <token> PEN_GOTO PEN_TURN PEN_DRAW PEN_UPDATE
 
