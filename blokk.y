@@ -58,7 +58,7 @@ void yyerror(const char *s) {
 %left T_AND T_OR
 %left T_GE T_LE '<' '>'
 %left '+' '-'
-%left '*' '/'
+%left '*' '/' '%'
 
 %nonassoc UNARY
 
@@ -101,6 +101,7 @@ expression : identifier { $$ = $1; }
            | expression '-' expression { $$ = new NumExpression($1, $3, '-'); }
            | expression '*' expression { $$ = new NumExpression($1, $3, '*'); }
            | expression '/' expression { $$ = new NumExpression($1, $3, '/'); }
+           | expression '%' expression { $$ = new NumExpression($1, $3, '%'); }
            | '(' expression ')' { $$ = $2; }
            ;
 
