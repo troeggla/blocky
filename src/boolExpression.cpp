@@ -61,9 +61,9 @@ bool BoolExpression::evaluate() {
     } else {
         switch (op) {
         case 1:
-            return (ex1->evaluate() and ex2->evaluate());
+            return (ex1->evaluate() && ex2->evaluate());
         case 2:
-            return (ex1->evaluate() or ex2->evaluate());
+            return (ex1->evaluate() || ex2->evaluate());
         case 3:
             return (ex1->evaluate() == ex2->evaluate());
         case 6:
