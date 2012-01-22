@@ -43,12 +43,12 @@ void yyerror(const char *s) {
 %token <string> T_STRING T_VAR;
 
 %token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE
-%token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS T_GLOBAL
+%token <token> T_NIL T_SEP T_RETURN T_DO T_END T_PUTS T_GLOBAL T_PUT
 %token <token> T_IF T_UNLESS T_ELSE T_WHILE T_TIMES
 
 %type <expr> expression identifier
 %type <boolean> bool_stmt
-%type <statement> statement assignment loop condition puts;
+%type <statement> statement assignment loop condition puts put;
 
 %nonassoc IFX
 %nonassoc T_ELSE
@@ -76,11 +76,17 @@ statement : assignment T_SEP
           | loop T_SEP
           | condition T_SEP
           | puts T_SEP
+          | put T_SEP
           ;
 
-puts      : T_PUTS expression { $$ = new PutStatement($2); }
-          | T_PUTS bool_stmt {  $$ = new PutStatement($2); }
-          | T_PUTS T_STRING { $$ = new PutStatement($2); }
+puts      : T_PUTS expression { $$ = new PutStatement(1, $2); }
+          | T_PUTS bool_stmt {  $$ = new PutStatement(1, $2); }
+          | T_PUTS T_STRING { $$ = new PutStatement(1, $2); }
+          ;
+
+put       : T_PUT expression { $$ = new PutStatement(2, $2); }
+          | T_PUT bool_stmt {  $$ = new PutStatement(2, $2); }
+          | T_PUT T_STRING { $$ = new PutStatement(2, $2); }
           ;
 
 identifier : T_VAR { $$ = new NumExpression(current, *$1); }

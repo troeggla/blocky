@@ -9,14 +9,15 @@
 #include "boolExpression.hpp"
 
 class PutStatement : public Statement {
+    int op;
     NumExpression *num;
     BoolExpression *boolean;
     std::string *str;
 
 public:
-    PutStatement(std::string*);
-    PutStatement(NumExpression*);
-    PutStatement(BoolExpression*);
+    PutStatement(int, std::string*);
+    PutStatement(int, NumExpression*);
+    PutStatement(int, BoolExpression*);
 
     virtual void evaluate();
 };
