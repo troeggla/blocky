@@ -20,7 +20,7 @@ extern "C" int yywrap() {}
 
 [ \t]               ;
 [ \t]*\n$           yylineno++;
-#.*$                ;
+#.*\n              yylineno++;
 
 \$[a-z][a-zA-Z0-9_]*  yylval.string = new std::string(yytext, yyleng); return T_VAR;
 [0-9]+\.[0-9]+        yylval.expr = new NumExpression(atof(yytext)); return T_FLOAT;
@@ -49,7 +49,8 @@ false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 "do"                current = new BlockScope(current); return TOKEN(T_DO);
 "end"               return TOKEN(T_END);
 
-[;\n]               yylineno++; return TOKEN(T_SEP);
+\n                  yylineno++; return TOKEN(T_SEP);
+;                   return TOKEN(T_SEP);
 .                   return TOKEN(yytext[0]);
 
 %%
