@@ -20,6 +20,7 @@ public:
     BlockScope* get_parent();
     void dump();
 
+    void set_var(std::string, double);
     void add_var(std::string, double);
     void delete_var(std::string);
 
