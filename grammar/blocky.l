@@ -48,6 +48,8 @@ false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 "do"                current = new BlockScope(current); return TOKEN(T_DO);
 "end"               return TOKEN(T_END);
 
+"scope.dump"        return TOKEN(SCOPE_DUMP);
+
 "pen.goto"          return TOKEN(PEN_GOTO);
 "pen.turn"          return TOKEN(PEN_TURN);
 "pen.line"          return TOKEN(PEN_DRAW);

@@ -17,9 +17,12 @@ BlockScope* BlockScope::get_parent() {
 void BlockScope::dump() {
     std::map<std::string, double>::iterator it;
 
+    std::cout << "----------------------------" << std::endl;
+    std::cout << "Variables in current scope: " << std::endl;
     for (it=variables.begin(); it!=variables.end(); ++it) {
-        std::cout << it->first << " => " << it->second << std::endl;
+        std::cout << "\t" << it->first << " => " << it->second << std::endl;
     }
+    std::cout << "----------------------------" << std::endl;
 }
 
 void BlockScope::set_var(std::string name, double value) {

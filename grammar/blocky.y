@@ -50,7 +50,7 @@ void yyerror(const char *s) {
 %token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE T_NIL
 %token <token> T_SEP T_DO T_END T_PUTS T_GLOBAL T_PUT
 %token <token> T_IF T_UNLESS T_ELSE T_WHILE T_TIMES
-%token <token> PEN_GOTO PEN_TURN PEN_DRAW PEN_UPDATE
+%token <token> PEN_GOTO PEN_TURN PEN_DRAW PEN_UPDATE SCOPE_DUMP
 
 %type <expr> expression identifier
 %type <boolean> bool_stmt
@@ -84,6 +84,7 @@ statement : assignment T_SEP
           | puts T_SEP
           | put T_SEP
           | pen_cmd T_SEP
+          | SCOPE_DUMP T_SEP { $$ = new BlockStatement(7, current); }
           ;
 
 pen_cmd : PEN_GOTO expression ',' expression { $$ = new PenStatement(1, $2, $4); }
