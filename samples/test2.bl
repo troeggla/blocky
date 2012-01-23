@@ -1,10 +1,21 @@
 puts "testing if/else"
 
+$var = 12
+put "Value: "
+puts $var
+
 # testing unless
-unless true do
+unless false do
     puts "if branch"; # sowas aber auch
 else
     puts "else branch"
+    $var = 13
 end
 
-puts "looks good"
+while $var == 12 do
+    puts "while"
+    $var = $var + 1
+end
+
+put "looks good "
+puts $var
