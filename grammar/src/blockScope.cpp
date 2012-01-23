@@ -43,7 +43,13 @@ void BlockScope::add_var(std::string name, double value) {
 }
 
 void BlockScope::delete_var(std::string name) {
-    variables.erase(name);
+    if (variables.find(name) == variables.end()) {
+        if (parent != 0) {
+            parent->delete_var(name);
+        }
+    } else {
+        variables.erase(name);
+    }
 }
 
 double BlockScope::find_var(std::string name) {

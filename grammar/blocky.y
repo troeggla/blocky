@@ -47,7 +47,7 @@ void yyerror(const char *s) {
 %token <boolean> T_BOOL;
 %token <string> T_STRING T_VAR;
 
-%token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE
+%token <token> T_EQUAL T_AND T_OR T_GE T_LE T_NE T_NIL
 %token <token> T_SEP T_DO T_END T_PUTS T_GLOBAL T_PUT
 %token <token> T_IF T_UNLESS T_ELSE T_WHILE T_TIMES
 %token <token> PEN_GOTO PEN_TURN PEN_DRAW PEN_UPDATE
@@ -118,6 +118,7 @@ expression : identifier { $$ = $1; }
            ;
 
 assignment : T_VAR '=' expression { $$ = new AssignStatement(current, *$1, $3); }
+           | T_VAR '=' T_NIL { $$ = new AssignStatement(current, *$1); }
            | T_GLOBAL T_VAR '=' expression { $$ = new AssignStatement(global, *$2, $4); }
            ;
 
@@ -147,7 +148,7 @@ condition : T_IF bool_stmt block { $$ = new BlockStatement(1, $2, current); curr
                                                                                  current = current->get_parent(); ifBlock = 0; }
           | T_UNLESS bool_stmt block { $$ = new BlockStatement(2, $2, current); current = current->get_parent(); }
           | T_UNLESS bool_stmt T_DO T_SEP statements T_ELSE T_SEP statements T_END { $$ = new BlockStatement(6, $2, ifBlock, current); 
-                                                                                     current = current->get_parent(); ifBlock = 0;}
+                                                                                     current = current->get_parent(); ifBlock = 0; }
           ;
 
 %%
