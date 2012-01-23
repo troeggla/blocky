@@ -1,0 +1,26 @@
+$u = 5
+
+while $u > 0 do
+    put "Value: "
+    puts $u
+
+    if $a.nil? do
+        global $a = 12
+        puts "a is nil"
+    end
+
+    $u = $u - 1
+end
+
+scope.dump
+$u = nil
+scope.dump
+
+pen.goto 320, 240
+8.times do
+    pen.line 100
+    pen.turn 45
+
+    pen.goto 320, 240
+end
+pen.update
