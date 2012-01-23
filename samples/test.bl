@@ -4,7 +4,7 @@ $cheep = 5
 
 puts $cheep + $flip * $var_1
 
-5+4 times do
+(5+4).times do
     puts "times"
 end
 
@@ -17,14 +17,6 @@ if 7 <= 6 do
     puts "conditional" 
     puts $ha
     puts $cheep
-end
-
-$i = 5
-while $i > 0 do
-    put "value of i: "
-    puts $i
-
-    $i = $i - 1
 end
 
 unless 7 <= 6 do

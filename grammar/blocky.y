@@ -126,7 +126,7 @@ block : T_DO T_SEP statements T_END
       ;
 
 loop : T_WHILE bool_stmt block { $$ = new BlockStatement(4, $2, current); current = current->get_parent(); } 
-     | expression T_TIMES block { $$ = new BlockStatement(3, $1, current); current = current->get_parent(); }
+     | expression '.' T_TIMES block { $$ = new BlockStatement(3, $1, current); current = current->get_parent(); }
      ;
 
 bool_stmt : T_BOOL { $$ = $1; }
