@@ -9,12 +9,14 @@
 #include "boolExpression.hpp"
 
 class AssignStatement : public Statement {
+    bool del;
     BlockScope *scope;
     std::string name;
     NumExpression *num;
 
 public:
     AssignStatement(BlockScope*, std::string, NumExpression*);
+    AssignStatement(BlockScope*, std::string);
 
     virtual void evaluate();
 };

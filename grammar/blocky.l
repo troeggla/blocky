@@ -29,6 +29,7 @@ extern "C" int yywrap() {}
 true                  yylval.boolean = new BoolExpression(true); return T_BOOL;
 false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 
+"nil"               return TOKEN(T_NIL);
 "and"               return TOKEN(T_AND);
 "or"                return TOKEN(T_OR);
 "=="                return TOKEN(T_EQUAL);

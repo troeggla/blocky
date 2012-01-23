@@ -1,9 +1,17 @@
 #include "assignStatement.hpp"
 
 AssignStatement::AssignStatement(BlockScope *scope, std::string name, NumExpression *num) : 
-scope(scope), name(name), num(num) {
+scope(scope), name(name), num(num), del(false) {
+}
+
+AssignStatement::AssignStatement(BlockScope *scope, std::string name) :
+scope(scope), name(name), del(true) {
 }
 
 void AssignStatement::evaluate() {
-    scope->add_var(name, num->evaluate());
+    if (del == false) {
+        scope->add_var(name, num->evaluate());
+    } else {
+        scope->delete_var(name);
+    }
 }
