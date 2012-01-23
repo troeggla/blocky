@@ -1,0 +1,11 @@
+$var = 12
+
+put "Variable value: "
+puts $var
+
+if true do
+    $var = nil
+end
+
+put "Value after delete: "
+puts $var
