@@ -5,14 +5,18 @@ while $u > 0 do
     puts $u
 
     if $a.nil? do
-        global $a = 12
         puts "a is nil"
+
+        global $a = 12
+        puts "not anymore..."
     end
 
     $u = $u - 1
 end
 
 scope.dump
+puts
+
 $u = nil
 scope.dump
 
