@@ -8,6 +8,9 @@ BoolExpression::BoolExpression(bool value) {
 BoolExpression::BoolExpression(NumExpression *ex) : numEx1(ex) {
 }
 
+BoolExpression::BoolExpression(BlockScope *scope, std::string name, char op) : scope(scope), name(name), op(op) {
+}
+
 BoolExpression::BoolExpression(BoolExpression *ex1, BoolExpression *ex2, char op) : ex1(ex1), ex2(ex2), op(op) {
 }
 
@@ -57,6 +60,15 @@ bool BoolExpression::evaluate() {
             return (numEx1->evaluate() > numEx2->evaluate());
         case 8:
             return (numEx1->evaluate() < numEx2->evaluate());
+        }
+    } else if (scope != 0) {
+        if (op == 10) {
+            try {
+                scope->find_var(name);
+                return false;
+            } catch (std::exception) {
+                return true;
+            }
         }
     } else {
         switch (op) {
