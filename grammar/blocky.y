@@ -96,6 +96,7 @@ pen_cmd : PEN_GOTO expression ',' expression { $$ = new PenStatement(1, $2, $4);
 puts      : T_PUTS expression { $$ = new PutStatement(1, $2); }
           | T_PUTS bool_stmt {  $$ = new PutStatement(1, $2); }
           | T_PUTS T_STRING { $$ = new PutStatement(1, $2); }
+          | T_PUTS { $$ = new PutStatement(1, new std::string("")); }
           ;
 
 put       : T_PUT expression { $$ = new PutStatement(2, $2); }

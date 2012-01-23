@@ -11,8 +11,10 @@ PutStatement::PutStatement(int op, BoolExpression *boolean) : op(op), boolean(bo
 
 void PutStatement::evaluate() {
     if (str != 0) {
-        std::string out = str->substr(1, str->length() - 2);
-        std::cout << out;
+        if (str->length() > 2) {
+            std::string out = str->substr(1, str->length() - 2);
+            std::cout << out;
+        }
         
         if (op == 1) {
             std::cout << std::endl;
