@@ -1,5 +1,9 @@
 #include "blockStatement.hpp"
 
+BlockStatement::BlockStatement(int op, BlockScope* scope) :
+op(op), scope(scope) {
+}
+
 BlockStatement::BlockStatement(int op, BoolExpression *boolean, BlockScope *scope) :
 op(op), boolean(boolean), scope(scope) {
 }
@@ -45,6 +49,7 @@ void BlockStatement::evaluate() {
                 elseScope->evaluate();
             }
         }
-
+    } else if (op == 7) {
+        scope->dump();
     }
 }
