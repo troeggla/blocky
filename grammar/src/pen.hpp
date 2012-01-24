@@ -14,6 +14,8 @@ class Pen {
     std::pair<int, int> position;
     int direction;
 
+    int red, green, blue;
+
     double toRadians(int);
     double getNewX(int, int);
     double getNewY(int, int);
@@ -25,6 +27,7 @@ public:
     static Pen *instance();
     ~Pen();
 
+    void setColor(int, int, int);
     void drawLine(int);
     void gotoXY(int, int);
     void turn(int);
