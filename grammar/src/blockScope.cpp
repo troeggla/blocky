@@ -41,7 +41,7 @@ void BlockScope::dumpall() {
     BlockScope *scope = this;
 
     std::cout << "----------------------------" << std::endl;
-    std::cout << "Varaibles in all scopes: " << std::endl;
+    std::cout << "Variables in all scopes: " << std::endl;
 
     while (true) {
         this->dump_vars(scope);

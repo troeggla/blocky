@@ -30,6 +30,7 @@ public:
     void setColor(int, int, int);
     void drawLine(int);
     void gotoXY(int, int);
+    void setDirection(int);
     void turn(int);
     void update();
 };
