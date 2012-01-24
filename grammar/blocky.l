@@ -49,6 +49,7 @@ false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 "end"               return TOKEN(T_END);
 
 "scope.dump"        return TOKEN(SCOPE_DUMP);
+"scope.dumpall"     return TOKEN(SCOPE_DUMPALL);
 
 "pen.goto"          return TOKEN(PEN_GOTO);
 "pen.turn"          return TOKEN(PEN_TURN);
