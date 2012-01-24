@@ -18,7 +18,11 @@ public:
     BlockScope(BlockScope*);
 
     BlockScope* get_parent();
+
+    std::map<std::string, double> getVars();
+    void dump_vars(BlockScope*);
     void dump();
+    void dumpall();
 
     void set_var(std::string, double);
     void add_var(std::string, double);

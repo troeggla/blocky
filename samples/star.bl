@@ -26,5 +26,8 @@ pen.goto 320, 240
     pen.turn 45
 
     pen.goto 320, 240
+    global $x = 123.456
 end
 pen.update
+
+scope.dumpall

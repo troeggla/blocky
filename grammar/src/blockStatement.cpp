@@ -51,5 +51,7 @@ void BlockStatement::evaluate() {
         }
     } else if (op == 7) {
         scope->dump();
+    } else if (op == 8) {
+        scope->dumpall();
     }
 }

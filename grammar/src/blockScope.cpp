@@ -14,14 +14,45 @@ BlockScope* BlockScope::get_parent() {
     return parent;
 }
 
-void BlockScope::dump() {
+std::map<std::string, double> BlockScope::getVars() {
+    return variables;
+}
+
+void BlockScope::dump_vars(BlockScope *scope) {
     std::map<std::string, double>::iterator it;
+    std::map<std::string, double> varmap = scope->getVars();
+
+    for (it=varmap.begin(); it!=varmap.end(); ++it) {
+        std::cout << "\t" << it->first << " => " << it->second << std::endl;
+    }
+}
+
+void BlockScope::dump() {
 
     std::cout << "----------------------------" << std::endl;
     std::cout << "Variables in current scope: " << std::endl;
-    for (it=variables.begin(); it!=variables.end(); ++it) {
-        std::cout << "\t" << it->first << " => " << it->second << std::endl;
+   
+    this->dump_vars(this);
+
+    std::cout << "----------------------------" << std::endl;
+}
+
+void BlockScope::dumpall() {
+    BlockScope *scope = this;
+
+    std::cout << "----------------------------" << std::endl;
+    std::cout << "Varaibles in all scopes: " << std::endl;
+
+    while (true) {
+        this->dump_vars(scope);
+
+        if (scope == scope->get_parent()) {
+            break;
+        } else {
+            scope = scope->get_parent();
+        }
     }
+
     std::cout << "----------------------------" << std::endl;
 }
 
