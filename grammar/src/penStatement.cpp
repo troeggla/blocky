@@ -36,5 +36,7 @@ void PenStatement::evaluate() {
         blue = (blue < 0) ? 0 : blue;
 
         Pen::instance()->setColor(red, green, blue);
+    } else if (op == 6) {
+        Pen::instance()->setDirection(num1->evaluate());
     }
 }

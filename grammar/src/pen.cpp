@@ -79,6 +79,10 @@ void Pen::turn(int degrees) {
     }
 }
 
+void Pen::setDirection(int direction) {
+    this->direction = direction;
+}
+
 void Pen::update() {
     SDL_Flip(screen);
     

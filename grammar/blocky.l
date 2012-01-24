@@ -56,6 +56,7 @@ false                 yylval.boolean = new BoolExpression(false); return T_BOOL;
 "pen.line"          return TOKEN(PEN_DRAW);
 "pen.update"        return TOKEN(PEN_UPDATE);
 "pen.color"         return TOKEN(PEN_COLOR);
+"pen.direction"     return TOKEN(PEN_DIRECTION);
 
 \n                  yylineno++; return TOKEN(T_SEP);
 ;                   return TOKEN(T_SEP);
