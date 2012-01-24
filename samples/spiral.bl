@@ -1,9 +1,21 @@
 $len = 10
 pen.goto 320, 240
 
+$red = 255
+$green = 255
+$blue = 255
+
+pen.color $red, $green, $blue
+
 20.times do 
     pen.line $len
     pen.turn 60
+
+    $red = $red - 10
+    $green = $green - 10
+    $blue = $blue - 10
+
+    pen.color $red, $green, $blue
 
     $len = $len + 10
 end
