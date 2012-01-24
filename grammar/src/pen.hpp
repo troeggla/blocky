@@ -28,6 +28,7 @@ public:
     ~Pen();
 
     void setColor(int, int, int);
+    void move(int);
     void drawLine(int);
     void gotoXY(int, int);
     void setDirection(int);

@@ -66,6 +66,14 @@ void Pen::drawLine(int length) {
     position.second = newY;
 }
 
+void Pen::move(int length) {
+    int newX = this->getNewX(this->direction, length);
+    int newY = this->getNewY(this->direction, length);
+
+    position.first = newX;
+    position.second = newY;
+}
+
 void Pen::gotoXY(int x, int y) {
     position.first = x;
     position.second = y;
