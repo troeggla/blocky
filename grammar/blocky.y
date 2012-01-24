@@ -54,7 +54,7 @@ void yyerror(const char *s) {
 
 %type <expr> expression identifier
 %type <boolean> bool_stmt
-%type <statement> statement assignment loop condition puts put pen_cmd;
+%type <statement> statement assignment loop condition puts put pen_cmd scope_cmd
 
 %nonassoc IFX
 %nonassoc T_ELSE
@@ -84,8 +84,11 @@ statement : assignment T_SEP
           | puts T_SEP
           | put T_SEP
           | pen_cmd T_SEP
-          | SCOPE_DUMP T_SEP { $$ = new BlockStatement(7, current); }
-          | SCOPE_DUMPALL T_SEP { $$ = new BlockStatement(8, current); }
+          | scope_cmd T_SEP
+          ;
+
+scope_cmd : SCOPE_DUMP { $$ = new BlockStatement(7, current); }
+          | SCOPE_DUMPALL { $$ = new BlockStatement(8, current); }
           ;
 
 pen_cmd : PEN_GOTO expression ',' expression { $$ = new PenStatement(1, $2, $4); }
