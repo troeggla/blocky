@@ -1,0 +1,14 @@
+pen.goto 100, 100
+pen.direction 0
+
+4.times do
+    4.times do
+        pen.line 20
+        pen.move 10
+    end
+
+    pen.line 20
+    pen.turn 90
+end
+
+pen.update
