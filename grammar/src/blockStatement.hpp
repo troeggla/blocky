@@ -17,6 +17,7 @@ public:
     BlockStatement(int, BoolExpression*, BlockScope*);
     BlockStatement(int, BoolExpression*, BlockScope*, BlockScope*);
     BlockStatement(int, NumExpression*, BlockScope*);
+    ~BlockStatement();
 
     virtual void evaluate();
 };

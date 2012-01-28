@@ -14,6 +14,7 @@ public:
     PenStatement(int, NumExpression*, NumExpression*);
     PenStatement(int, NumExpression*);
     PenStatement(int);
+    ~PenStatement();
 
     virtual void evaluate();
 };

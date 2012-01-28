@@ -8,6 +8,10 @@ AssignStatement::AssignStatement(BlockScope *scope, std::string name) :
 scope(scope), name(name), del(true) {
 }
 
+AssignStatement::~AssignStatement() {
+    delete num;
+}
+
 void AssignStatement::evaluate() {
     if (del == false) {
         scope->add_var(name, num->evaluate());

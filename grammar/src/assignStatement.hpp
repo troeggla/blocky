@@ -17,6 +17,7 @@ class AssignStatement : public Statement {
 public:
     AssignStatement(BlockScope*, std::string, NumExpression*);
     AssignStatement(BlockScope*, std::string);
+    ~AssignStatement();
 
     virtual void evaluate();
 };

@@ -12,6 +12,6 @@ if $hu.nil? do
 end
 
 
-
+$var = nil
 put "Value after delete: "
 puts $var

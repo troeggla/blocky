@@ -13,6 +13,12 @@ PenStatement::PenStatement(int op, NumExpression *num1) : op(op), num1(num1) {
 PenStatement::PenStatement(int op) : op(op) {
 }
 
+PenStatement::~PenStatement() {
+    delete num1;
+    delete num2;
+    delete num3;
+}
+
 void PenStatement::evaluate() {
     if (op == 1) {
         Pen::instance()->gotoXY(num1->evaluate(), num2->evaluate());

@@ -6,6 +6,14 @@ BlockScope::BlockScope() {
 BlockScope::BlockScope(BlockScope *parent) : parent(parent) {
 }
 
+BlockScope::~BlockScope() {
+    std::vector<Statement*>::iterator it;
+
+    for (it=statements.begin(); it<statements.end(); it++) {
+        delete (*it);
+    }
+}
+
 BlockScope* BlockScope::get_parent() {
     if (parent == 0) {
         return this;
