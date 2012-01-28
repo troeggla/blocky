@@ -16,6 +16,13 @@ BlockStatement::BlockStatement(int op, NumExpression *num, BlockScope *scope) :
 op(op), num(num), scope(scope) {
 }
 
+BlockStatement::~BlockStatement() {
+    delete scope;
+    delete elseScope;
+    delete boolean;
+    delete num;
+}
+
 void BlockStatement::evaluate() {
     if (op == 1) {
         if (boolean->evaluate()) {

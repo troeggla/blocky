@@ -16,6 +16,7 @@ class BlockScope {
 public:
     BlockScope();
     BlockScope(BlockScope*);
+    ~BlockScope();
 
     BlockScope* get_parent();
 

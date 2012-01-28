@@ -12,13 +12,9 @@ NumExpression::NumExpression(NumExpression *ex1, NumExpression *ex2, char op) : 
 }
 
 NumExpression::~NumExpression() {
-    if (ex1 != 0) {
-        delete ex1;
-    }
-
-    if (ex2 != 0) {
-        delete ex2;
-    }
+    delete value;
+    delete ex1;
+    delete ex2;
 }
 
 std::string NumExpression::getType() {

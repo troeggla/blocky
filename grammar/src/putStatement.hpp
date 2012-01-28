@@ -18,6 +18,7 @@ public:
     PutStatement(int, std::string*);
     PutStatement(int, NumExpression*);
     PutStatement(int, BoolExpression*);
+    ~PutStatement();
 
     virtual void evaluate();
 };

@@ -9,6 +9,12 @@ PutStatement::PutStatement(int op, NumExpression *num) : op(op), num(num) {
 PutStatement::PutStatement(int op, BoolExpression *boolean) : op(op), boolean(boolean) {
 }
 
+PutStatement::~PutStatement() {
+    delete num;
+    delete boolean;
+    delete str;
+}
+
 void PutStatement::evaluate() {
     if (str != 0) {
         if (str->length() > 2) {
