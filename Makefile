@@ -6,8 +6,8 @@ bison: grammar/blocky.y
 flex: grammar/blocky.l grammar/parser.hpp
 	flex -o grammar/tokens.cpp grammar/blocky.l
 
-compile: grammar/parser.cpp grammar/tokens.cpp grammar/src/*.cpp -lSDL -lSDL_gfx
-	c++ $^ -o blocky
+compile: grammar/parser.cpp grammar/tokens.cpp grammar/src/*.cpp
+	c++ $^ -lSDL -lSDL_gfx -o blocky
 
 clean:
 	@echo -e "removing unused files..."
