@@ -173,8 +173,11 @@ int main(int argc, char *argv[]) {
 
         try {
             global->evaluate();
-        } catch (std::exception) {
-            std::cerr << ">> Runtime exception, program aborted! <<" << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << std::endl << ">> ----------------------------------- <<" << std::endl;
+            std::cerr << "   Runtime exception! Program aborted: " << std::endl;
+            std::cerr << "       " << e.what() << std::endl;
+            std::cerr << ">> ----------------------------------- <<" << std::endl << std::endl;
         }
     } else {
         std::cerr << "No input file!" << std::endl;
