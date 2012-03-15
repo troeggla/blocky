@@ -3,14 +3,11 @@ $var = 12
 put "Variable value: "
 puts $var
 
-if !($var.nil?) do
+unless $var.nil? do
     puts "$var is not nil"
 end
 
-if $hu.nil? do
-    puts "$hu is nil"
-end
-
+puts "WS?"
 
 $var = nil
 put "Value after delete: "

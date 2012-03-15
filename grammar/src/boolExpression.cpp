@@ -57,11 +57,10 @@ bool BoolExpression::evaluate() {
         }
     } else if (scope != 0) {
         if (op == 10) {
-            double value = scope->get_var(name);
-
-            if (value == 0) {
+            try {
+                scope->get_var(name);
                 return false;
-            } else {
+            } catch (std::exception) {
                 return true;
             }
         }
