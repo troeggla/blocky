@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "statement.hpp"
+#include "exceptions.hpp"
 
 class BlockScope {
     BlockScope *parent;
