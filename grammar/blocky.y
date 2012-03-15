@@ -171,7 +171,11 @@ int main(int argc, char *argv[]) {
         yyin = fopen(argv[1], "r");
         yyparse();
 
-        global->evaluate();
+        try {
+            global->evaluate();
+        } catch (std::exception) {
+            std::cerr << ">> Runtime exception, program aborted! <<" << std::endl;
+        }
     } else {
         std::cerr << "No input file!" << std::endl;
     }

@@ -94,10 +94,10 @@ void BlockScope::delete_var(std::string name) {
     }
 }
 
-double BlockScope::find_var(std::string name) {
+double BlockScope::get_var(std::string name) {
     if (variables.find(name) == variables.end()) {
         if (parent != 0) {
-            return parent->find_var(name);
+            return parent->get_var(name);
         } else {
             throw std::exception();
         }
@@ -106,14 +106,14 @@ double BlockScope::find_var(std::string name) {
     }
 }
 
-double BlockScope::get_var(std::string name) {
+/*double BlockScope::get_var(std::string name) {
     try {
         return find_var(name);
     } catch (std::exception) {
         this->add_var(name, 0);
         return 0;
     }
-}
+}*/
 
 void BlockScope::add_statement(Statement *stmt) {
     statements.push_back(stmt); 

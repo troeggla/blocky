@@ -29,7 +29,7 @@ public:
     void add_var(std::string, double);
     void delete_var(std::string);
 
-    double find_var(std::string);
+    //double find_var(std::string);
     double get_var(std::string);
 
     void add_statement(Statement*);
