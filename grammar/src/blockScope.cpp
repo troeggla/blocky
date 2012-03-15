@@ -99,7 +99,7 @@ double BlockScope::get_var(std::string name) {
         if (parent != 0) {
             return parent->get_var(name);
         } else {
-            throw std::exception();
+            throw UndefinedVarException(name);
         }
     } else {
         return variables[name];
