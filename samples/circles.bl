@@ -4,6 +4,12 @@ pen.direction -90
 $len = 1
 
 20.times do
+    if $len % 2 == 0 do
+        pen.color 255, 255, 255
+    else
+        pen.color 255, 0, 0
+    end
+
     72.times do
         pen.line $len
         pen.turn 5
