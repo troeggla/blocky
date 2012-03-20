@@ -1,0 +1,15 @@
+pen.goto 100, 250
+pen.direction -90
+
+$len = 1
+
+20.times do
+    72.times do
+        pen.line $len
+        pen.turn 5
+    end
+
+    $len = $len + 1
+end
+
+pen.update

@@ -29,19 +29,19 @@ Pen::~Pen() {
     SDL_Quit();
 }
 
-double Pen::toRadians(int degree) {
+double Pen::toRadians(double degree) {
     return ((double)degree) * PI/180;
 }
 
-double Pen::getNewX(int angle, int len) {
-    double rad = this->toRadians(angle);
+double Pen::getNewX(double len) {
+    double rad = this->toRadians(this->direction);
     double line_len = cos(rad) * len;
 
     return this->position.first + line_len;
 }
 
-double Pen::getNewY(int angle, int len) {
-    double rad = this->toRadians(angle);
+double Pen::getNewY(double len) {
+    double rad = this->toRadians(this->direction);
     double line_len = sin(rad) * len;
 
     return this->position.second + line_len;
@@ -53,9 +53,9 @@ void Pen::setColor(int r, int g, int b) {
     blue = b;
 }
 
-void Pen::drawLine(int length) {
-    int newX = this->getNewX(this->direction, length);
-    int newY = this->getNewY(this->direction, length);
+void Pen::drawLine(double length) {
+    double newX = this->getNewX(length);
+    double newY = this->getNewY(length);
 
     lineRGBA(screen, 
              position.first, position.second, 
@@ -66,9 +66,9 @@ void Pen::drawLine(int length) {
     position.second = newY;
 }
 
-void Pen::move(int length) {
-    int newX = this->getNewX(this->direction, length);
-    int newY = this->getNewY(this->direction, length);
+void Pen::move(double length) {
+    int newX = this->getNewX(length);
+    int newY = this->getNewY(length);
 
     position.first = newX;
     position.second = newY;
@@ -79,7 +79,7 @@ void Pen::gotoXY(int x, int y) {
     position.second = y;
 }
 
-void Pen::turn(int degrees) {
+void Pen::turn(double degrees) {
     direction = direction + degrees;
 
     if (direction >= 360) {
@@ -87,7 +87,7 @@ void Pen::turn(int degrees) {
     }
 }
 
-void Pen::setDirection(int direction) {
+void Pen::setDirection(double direction) {
     this->direction = direction;
 }
 

@@ -1,0 +1,24 @@
+pen.goto 200, 200
+pen.color 255, 0, 0
+pen.goto 200, 200
+pen.direction -90
+
+8.times do
+    4.times do
+        pen.line 20
+        pen.turn 30
+    end
+
+    7.times do
+        pen.line 10
+        pen.turn 15
+    end
+
+    9.times do
+        pen.line 3
+        pen.turn 10
+    end
+end
+
+puts "Drawing a flower..."
+pen.update
