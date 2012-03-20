@@ -11,14 +11,14 @@
 
 class Pen {
     SDL_Surface *screen;
-    std::pair<int, int> position;
-    int direction;
+    std::pair<double, double> position;
+    double direction;
 
     int red, green, blue;
 
-    double toRadians(int);
-    double getNewX(int, int);
-    double getNewY(int, int);
+    double toRadians(double);
+    double getNewX(double);
+    double getNewY(double);
 
     static Pen *inst;
 
@@ -28,11 +28,11 @@ public:
     ~Pen();
 
     void setColor(int, int, int);
-    void move(int);
-    void drawLine(int);
+    void move(double);
+    void drawLine(double);
     void gotoXY(int, int);
-    void setDirection(int);
-    void turn(int);
+    void setDirection(double);
+    void turn(double);
     void update();
 };
 

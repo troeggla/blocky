@@ -1,0 +1,16 @@
+pen.goto 200, 200
+
+5.times do
+    pen.line 200
+    pen.turn 144
+end
+
+pen.goto 195, 235
+pen.direction -90
+
+72.times do
+    pen.line 9
+    pen.turn 5
+end
+
+pen.update
