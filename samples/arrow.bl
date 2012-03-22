@@ -11,7 +11,3 @@ pen.line 141
 
 pen.turn -135
 pen.line 100
-
-if true do
-    pen.update
-end

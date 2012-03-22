@@ -3,6 +3,8 @@ pen.color 255, 0, 0
 pen.goto 200, 200
 pen.direction -90
 
+puts "Drawing a flower..."
+
 8.times do
     4.times do
         pen.line 20
@@ -19,6 +21,3 @@ pen.direction -90
         pen.turn 10
     end
 end
-
-puts "Drawing a flower..."
-pen.update
