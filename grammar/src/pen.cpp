@@ -56,6 +56,10 @@ void Pen::setColor(int r, int g, int b) {
 }
 
 void Pen::setDelay(double delay) {
+    if (delay < 0) {
+        delay = 0;
+    }
+
     this->delay = delay;
 }
 
