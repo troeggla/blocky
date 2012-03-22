@@ -14,6 +14,8 @@ class Pen {
     std::pair<double, double> position;
     double direction;
 
+    bool window_active;
+    double delay;
     int red, green, blue;
 
     double toRadians(double);
@@ -32,8 +34,9 @@ public:
     void drawLine(double);
     void gotoXY(int, int);
     void setDirection(double);
+    void setDelay(double);
     void turn(double);
-    void update();
+    void close_listener();
 };
 
 #endif
