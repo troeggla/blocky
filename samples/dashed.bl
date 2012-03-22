@@ -10,5 +10,3 @@ pen.direction 0
     pen.line 20
     pen.turn 90
 end
-
-pen.update

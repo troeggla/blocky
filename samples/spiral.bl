@@ -30,4 +30,3 @@ pen.direction 0
 end
 
 scope.dumpall
-pen.update

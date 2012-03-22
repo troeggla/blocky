@@ -33,5 +33,3 @@ pen.turn 180
 pen.line 40
 pen.turn -45
 pen.line 70
-
-pen.update

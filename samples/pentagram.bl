@@ -14,5 +14,3 @@ pen.color 255, 255, 255
     pen.line 9
     pen.turn 5
 end
-
-pen.update
