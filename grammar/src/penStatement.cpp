@@ -10,9 +10,6 @@ op(op), num1(num1), num2(num2), num3(num3) {
 PenStatement::PenStatement(int op, NumExpression *num1) : op(op), num1(num1) {
 }
 
-PenStatement::PenStatement(int op) : op(op) {
-}
-
 PenStatement::~PenStatement() {
     delete num1;
     delete num2;
@@ -27,7 +24,7 @@ void PenStatement::evaluate() {
     } else if (op == 3) {
         Pen::instance()->drawLine(num1->evaluate());
     } else if (op == 4) {
-        Pen::instance()->update();
+        Pen::instance()->setDelay(num1->evaluate());
     } else if (op == 5) {
         int red = num1->evaluate();
         int green = num2->evaluate();

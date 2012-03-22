@@ -11,7 +11,9 @@ Pen* Pen::instance() {
 }
 
 Pen::Pen() {
+    this->window_active = false;
     this->direction = 0;
+    this->delay = 0;
     this->position = std::make_pair(0, 0);
 
     red = 255;
@@ -53,6 +55,10 @@ void Pen::setColor(int r, int g, int b) {
     blue = b;
 }
 
+void Pen::setDelay(double delay) {
+    this->delay = delay;
+}
+
 void Pen::drawLine(double length) {
     double newX = this->getNewX(length);
     double newY = this->getNewY(length);
@@ -64,6 +70,11 @@ void Pen::drawLine(double length) {
 
     position.first = newX;
     position.second = newY;
+
+    SDL_Delay(delay);
+    SDL_Flip(screen);
+
+    window_active = true;
 }
 
 void Pen::move(double length) {
@@ -91,9 +102,11 @@ void Pen::setDirection(double direction) {
     this->direction = direction;
 }
 
-void Pen::update() {
-    SDL_Flip(screen);
-    
+void Pen::close_listener() { 
+    if (!window_active) {
+        return;
+    }
+
     SDL_Event event;
     while (true) {
         if (SDL_PollEvent(&event)) {
