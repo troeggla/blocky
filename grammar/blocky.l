@@ -18,9 +18,8 @@ extern "C" int yywrap() {}
 
 %%
 
-[ \t]               ;
-[ \t]*\n$           yylineno++;
-#.*\n              yylineno++;
+[ \t]*                ;
+#[^\n]*               ;
 
 \$[a-z][a-zA-Z0-9_]*  yylval.string = new std::string(yytext, yyleng); return T_VAR;
 [0-9]+\.[0-9]+        yylval.expr = new NumExpression(atof(yytext)); return T_FLOAT;
