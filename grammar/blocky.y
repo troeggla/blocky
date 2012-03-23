@@ -30,7 +30,7 @@ BlockScope *ifBlock = 0;
 extern int yylex();
 
 void yyerror(const char *s) {
-    std::cerr << "ERROR: " << s << " in line " << yylineno-1 << ". Unexpected token " << yylval.token << std::endl;
+    std::cerr << "ERROR: " << s << " in line " << yylineno << ". Unexpected token " << yylval.token << std::endl;
     exit(1);
 }
 %}
@@ -77,6 +77,8 @@ program : statements
 
 statements : statement { current->add_statement($1); }
            | statements statement { current->add_statement($2); }
+           | T_SEP
+           | statements T_SEP
            ;
 
 statement : assignment T_SEP
