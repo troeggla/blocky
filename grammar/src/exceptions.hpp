@@ -1,17 +1,28 @@
 #include <stdexcept>
 #include <string>
+#include <sstream>
 
 #ifndef exceptions_hpp
 #define exceptions_hpp
 
-class UndefinedVarException : public std::runtime_error {
+class UndefinedVarException : public std::exception {
+    std::string msg;
+
 public:
-    UndefinedVarException(std::string msg) : std::runtime_error("Variable " + msg + " is not defined") {}
+    UndefinedVarException(std::string);
+    virtual ~UndefinedVarException() throw() {}
+
+    virtual const char* what() const throw(); 
 };
 
-class IllegalValueException : public std::runtime_error {
+class IllegalValueException : public std::exception {
+    double value;
+
 public:
-    IllegalValueException(std::string msg) : std::runtime_error("Value " + msg + " is not allowed here") {}
+    IllegalValueException(double);
+    virtual ~IllegalValueException() throw() {}
+
+    virtual const char* what() const throw();
 };
 
 #endif

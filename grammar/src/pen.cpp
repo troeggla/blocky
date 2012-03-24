@@ -50,21 +50,16 @@ double Pen::getNewY(double len) {
 }
 
 void Pen::setColor(int r, int g, int b) {
-    std::stringstream s;
-
     if (r<0 || r>255) {
-        s << r;
-        throw IllegalValueException(s.str());
+        throw IllegalValueException(r);
     }
 
     if (g<0 || g>255) {
-        s << g;
-        throw IllegalValueException(s.str());
+        throw IllegalValueException(g);
     }
 
     if (b<0 || b>255) {
-        s << b;
-        throw IllegalValueException(s.str());
+        throw IllegalValueException(b);
     }
 
     red = r;
@@ -74,10 +69,7 @@ void Pen::setColor(int r, int g, int b) {
 
 void Pen::setDelay(double delay) {
     if (delay < 0) {
-        std::stringstream s;
-        s << delay;
-
-        throw IllegalValueException(s.str());
+        throw IllegalValueException(delay);
     }
 
     this->delay = delay;
