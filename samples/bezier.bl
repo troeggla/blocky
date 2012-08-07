@@ -1,0 +1,22 @@
+$t = 0
+
+$p0_x = 10
+$p0_y = 10
+
+$p1_x = 600
+$p1_y = 10
+
+$p2_x = 10
+$p2_y = 400
+
+pen.goto $p0_x, $p0_y
+
+while $t <= 1 do
+    $fx = ($p0_x - 2 * $p1_x + $p2_x) * $t^2 + (-2 * $p0_x + 2 * $p1_x) * $t + $p0_x
+    $fy = ($p0_y - 2 * $p1_y + $p2_y) * $t^2 + (-2 * $p0_y + 2 * $p1_y) * $t + $p0_y
+
+    pen.lineTo $fx, $fy
+    pen.delay 50
+
+    $t = $t + 0.02
+end
