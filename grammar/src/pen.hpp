@@ -39,6 +39,7 @@ public:
     void setDirection(double);
     void setDelay(double);
     void turn(double);
+    void lineTo(double, double);
     void close_listener();
 };
 

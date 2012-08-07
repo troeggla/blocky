@@ -35,5 +35,8 @@ void PenStatement::evaluate() {
         Pen::instance()->setDirection(num1->evaluate());
     } else if (op == 7) {
         Pen::instance()->move(num1->evaluate());
+    } else if (op == 8) {
+        Pen::instance()->lineTo(num1->evaluate(), num2->evaluate());
     }
+
 }

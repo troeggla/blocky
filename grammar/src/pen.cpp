@@ -118,6 +118,21 @@ void Pen::setDirection(double direction) {
     this->direction = direction;
 }
 
+void Pen::lineTo(double x, double y) {
+    lineRGBA(screen, 
+             position.first, position.second, 
+             x, y, 
+             red, green, blue, 255);
+
+    position.first = x;
+    position.second = y;
+
+    SDL_Delay(delay);
+    SDL_Flip(screen);
+
+    window_active = true;
+}
+
 void Pen::close_listener() { 
     if (!window_active) {
         return;
