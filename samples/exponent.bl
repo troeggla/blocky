@@ -1,0 +1,11 @@
+$i = 0
+while $i <= 10 do
+    $result = 2 ^ $i
+
+    put "2^"
+    put $i
+    put " = "
+    puts $result
+
+    $i = $i + 1
+end

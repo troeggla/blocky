@@ -2,6 +2,7 @@
 #define numExpression_hpp
 
 #include <string>
+#include <math.h>
 
 #include "blockScope.hpp"
 #include "expression.hpp"

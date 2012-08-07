@@ -39,6 +39,8 @@ double NumExpression::evaluate() {
             return ex1->evaluate() * ex2->evaluate();
         case '/':
             return ex1->evaluate() / ex2->evaluate();
+        case '^':
+            return pow(ex1->evaluate(), ex2->evaluate());
         case '%':
             return (int)ex1->evaluate() % (int)ex2->evaluate();
         }
