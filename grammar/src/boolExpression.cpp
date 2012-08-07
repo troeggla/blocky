@@ -5,16 +5,16 @@ BoolExpression::BoolExpression(bool value) {
     *(this->value) = value;
 }
 
-BoolExpression::BoolExpression(NumExpression *ex) : numEx1(ex) {
+BoolExpression::BoolExpression(NumExpression *ex) : numEx1(ex), value(0) {
 }
 
-BoolExpression::BoolExpression(BlockScope *scope, std::string name, char op) : scope(scope), name(name), op(op) {
+BoolExpression::BoolExpression(BlockScope *scope, std::string name, char op) : scope(scope), name(name), op(op), value(0) {
 }
 
-BoolExpression::BoolExpression(BoolExpression *ex1, BoolExpression *ex2, char op) : ex1(ex1), ex2(ex2), op(op) {
+BoolExpression::BoolExpression(BoolExpression *ex1, BoolExpression *ex2, char op) : ex1(ex1), ex2(ex2), op(op), value(0) {
 }
 
-BoolExpression::BoolExpression(NumExpression *ex1, NumExpression *ex2, char op) : numEx1(ex1), numEx2(ex2), op(op) {
+BoolExpression::BoolExpression(NumExpression *ex1, NumExpression *ex2, char op) : numEx1(ex1), numEx2(ex2), op(op), value(0) {
 }
 
 BoolExpression::~BoolExpression() {
