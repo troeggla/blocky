@@ -65,6 +65,7 @@ void yyerror(const char *s) {
 %left T_GE T_LE '<' '>'
 %left '+' '-'
 %left '*' '/' '%'
+%left '^'
 
 %nonassoc UNARY
 
@@ -121,6 +122,7 @@ identifier : T_VAR { $$ = new NumExpression(current, *$1); }
 
 expression : identifier { $$ = $1; }
            | '-' expression %prec UNARY { $$ = new NumExpression($2, new NumExpression(-1), '*'); }
+           | expression '^' expression { $$ = new NumExpression($1, $3, '^'); }
            | expression '+' expression { $$ = new NumExpression($1, $3, '+'); }
            | expression '-' expression { $$ = new NumExpression($1, $3, '-'); }
            | expression '*' expression { $$ = new NumExpression($1, $3, '*'); }
