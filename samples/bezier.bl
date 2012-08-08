@@ -41,3 +41,5 @@ while $t <= 1.01 do
 
     $t = $t + 0.02
 end
+
+puts "DONE"
